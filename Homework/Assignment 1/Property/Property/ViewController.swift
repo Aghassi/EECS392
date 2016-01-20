@@ -41,13 +41,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(textField: UITextField) {
-        if checkAllFieldsFilled() {
-            let property = Property()
-            property.name = nameTextField.text!
-            property.address = addressTextField.text!
-            property.propertyData = purchaseDataTextField.text!
-            property.price = Double(purchasePriceTextField.text!)!
-            property.owner = ownersNameTextField.text!
+        if allFieldsFilled() {
+            purchase()
         }
         else {
             print("Please fill in all fields")
@@ -57,7 +52,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     /**
      Checks all the text fields are filled
     */
-    func checkAllFieldsFilled() -> Bool {
+    func allFieldsFilled() -> Bool {
         for field in fields {
             if field.text!.isEmpty {
                 return false
@@ -65,6 +60,16 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
         
         return true
+    }
+    
+    func purchase() {
+        let property = Property()
+        property.name = nameTextField.text!
+        property.address = addressTextField.text!
+        property.propertyData = purchaseDataTextField.text!
+        property.price = Double(purchasePriceTextField.text!)!
+        property.owner = ownersNameTextField.text!
+        print("The property \(property.name) at \(property.address) will be purchased for \(property.price) from the owner \(property.owner) ")
     }
 }
 
