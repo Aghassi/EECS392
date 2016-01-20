@@ -15,11 +15,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: UITextFieldDelegate
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        <#code#>
+        textField.resignFirstResponder()
+        return true
     }
     
     func textFieldDidEndEditing(textField: UITextField) {
-        <#code#>
+        mealNameLabel.text = nameTextField.text
     }
     
     // MARK: Action
