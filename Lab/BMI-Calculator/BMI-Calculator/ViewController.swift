@@ -8,18 +8,44 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate {
+    @IBOutlet weak var heightTextField: UITextField!
+    @IBOutlet weak var weightTextField: UITextField!
+    @IBOutlet weak var bmiLabel: UILabel!
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+    var height: Double?
+    var weight: Double?
+    
+    // Calculated value
+    var BMI: Double {
+        get {
+            if let w = weight {
+                if let h = height {
+                    return (w * 703)/((h)*(h))
+                }
+            }
+            return 0.0
+        }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        if textField == heightTextField {
+            height = Double(heightTextField.text!)
+        }
+        if textField == weightTextField {
+            weight = Double(weightTextField.text!)
+        }
+        textField.resignFirstResponder()
+        self.update()
+        print("We are here")
+        return true
     }
-
-
+    
+    /**
+     Updates the `bmiLabel` based on weight and height
+    */
+    func update() {
+        // `BMI` will calculate its own value since it doesn't have one
+        bmiLabel.text = "BMI: " + String(self.BMI)
+    }
 }
-
