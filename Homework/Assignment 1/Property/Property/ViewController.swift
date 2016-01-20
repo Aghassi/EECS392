@@ -16,6 +16,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var purchasePriceTextField: UITextField!
     @IBOutlet weak var ownersNameTextField: UITextField!
     
+    // MARK: Buttons
+    @IBAction func purchaseButton(sender: UIButton) {
+        purchase()
+    }
+    
+    // Used to house the fields so we can search over them
     var fields: [UITextField] = []
     
     override func viewDidLoad() {
@@ -41,16 +47,27 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(textField: UITextField) {
+        purchase()
+    }
+    
+    // MARK: Helper functions
+    /**
+     Checks if all the fields are filled, and will create a new property object if they are. Otherwise, it prints `"Please fill in all fields"` to the console
+    */
+    func purchase() {
         if allFieldsFilled() {
-            purchase()
+            createData()
         }
         else {
             print("Please fill in all fields")
         }
+        
     }
     
     /**
      Checks all the text fields are filled
+     
+     - returns: `true` if all the text fields are no empty
     */
     func allFieldsFilled() -> Bool {
         for field in fields {
@@ -62,7 +79,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
-    func purchase() {
+    /**
+     Takes the properties from the textfield outlets and assigns them to a new `Property` object and prints them to the console.
+    */
+    func createData() {
         let property = Property()
         property.name = nameTextField.text!
         property.address = addressTextField.text!

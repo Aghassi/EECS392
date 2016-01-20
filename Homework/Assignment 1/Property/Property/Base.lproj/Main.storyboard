@@ -118,6 +118,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ucn-fJ-pfh">
                                 <rect key="frame" x="268" y="387" width="64" height="30"/>
                                 <state key="normal" title="Purchase"/>
+                                <connections>
+                                    <action selector="purchaseButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vgf-Yu-i6h"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
