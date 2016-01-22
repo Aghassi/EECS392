@@ -64,15 +64,16 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="Dyy-MB-gOi"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="enter purchase data" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hpD-hE-xMn">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="enter purchase date" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hpD-hE-xMn">
                                 <rect key="frame" x="20" y="215" width="560" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                                 <connections>
+                                    <action selector="purchaseDateField:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="xjr-Bf-nMO"/>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="IRj-9P-x6E"/>
                                 </connections>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Purchase Data" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aZS-Zc-UTb">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Purchase Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aZS-Zc-UTb">
                                 <rect key="frame" x="20" y="186" width="112" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="b5u-XW-rMp"/>
@@ -162,7 +163,7 @@
                         <outlet property="addressTextField" destination="mDX-fK-KSc" id="LoW-i2-Q2Y"/>
                         <outlet property="nameTextField" destination="vNr-Se-3aK" id="QsG-j7-UAv"/>
                         <outlet property="ownersNameTextField" destination="I0f-4J-vKt" id="Vmy-oH-CHe"/>
-                        <outlet property="purchaseDataTextField" destination="hpD-hE-xMn" id="eoq-pa-NWK"/>
+                        <outlet property="purchaseDateTextField" destination="hpD-hE-xMn" id="HDp-6w-UmK"/>
                         <outlet property="purchasePriceTextField" destination="mqC-bj-8Es" id="JOP-g1-gu8"/>
                     </connections>
                 </viewController>

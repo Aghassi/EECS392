@@ -12,7 +12,7 @@ class Property {
     // MARK: Properties
     var name: String = ""
     var address: String = ""
-    var propertyData: String = ""
+    var propertyDate: String = ""
     var price: Double! = 0.0
     var owner: String = ""
     
