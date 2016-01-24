@@ -146,7 +146,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         property.propertyDate = purchaseDateTextField.text!
         property.price = Double(purchasePriceTextField.text!)!
         property.owner = ownersNameTextField.text!
-        print("The property \(property.name) at \(property.address) will be purchased for \(property.price) from the owner \(property.owner) ")
+        print("The property \(property.name) at \(property.address) will be purchased for \(property.price) from the owner \(property.owner) on \(property.propertyDate) ")
     }
 }
 
