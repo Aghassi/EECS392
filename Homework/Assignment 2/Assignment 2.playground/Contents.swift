@@ -56,7 +56,39 @@ class FibonacciGenerator : GeneratorType {
 }
 
 let fib = Fibonacci().generate()
-let n = 10
+let n = 20
+var computed = 0
 for _ in 1..<n {
-  print(String(fib.next()))
+  guard let fib = fib.next() else {
+    break
+  }
+  computed = fib
 }
+print(computed)
+
+
+// MARK: 4
+/**
+  4  Create a structure to store the information of a student. The structure needs to be able to store the following information: Student ID (String) Student Name (String) Date of birth (DOB). DOB itself is also a struture containing the year, month, and day. Add a computed property named age to the student structure so that you can obtain the age of a student. Create an instance of the structure and print out the age of the student.
+ */
+
+struct DOB {
+  // TODO: This should actualy make sure the year/month/day is limited to 4/2/2 characters respectively
+  var year, month, day: Int
+}
+
+struct Student {
+  var studentID, name: String
+  var dob: DOB
+  var age : Int {
+    // calculates the age by taking the difference between this year and the one in the DOB
+    let date = NSDate()
+    let calendar = NSCalendar.currentCalendar()
+    let year = calendar.component(.Year, fromDate: date)
+    return year - dob.year
+  }
+}
+
+let bobDOB = DOB(year: 1993, month: 08, day: 01)
+var student = Student(studentID: "BobEvans", name: "Bob", dob: bobDOB)
+print(student.age)
