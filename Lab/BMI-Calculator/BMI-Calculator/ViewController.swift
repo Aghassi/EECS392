@@ -41,6 +41,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        super.touchesBegan(touches, withEvent: event)
+        
+    }
+    
     /**
      Updates the `bmiLabel` based on weight and height
     */
