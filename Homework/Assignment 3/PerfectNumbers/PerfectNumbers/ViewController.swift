@@ -19,7 +19,22 @@ class ViewController: UIViewController {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
   }
-
+  
+  // MARK: Logic
+  func isPerfectNumber(start: Int, end: Int) -> (Bool, Int) {
+    var sumSoFar = 0
+    
+    for (var index = 0; index < end; index++) {
+      if ( (start+index) % index == 0) {
+        sumSoFar += index;
+      }
+      if ((start+index) == sumSoFar) {
+        return (true, (start+index))
+      }
+    }
+    
+    return (false, 0)
+  }
 
 }
 
