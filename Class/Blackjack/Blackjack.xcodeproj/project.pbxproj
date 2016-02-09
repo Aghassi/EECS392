@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D40438861C624BAF003582A7 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40438851C624BAF003582A7 /* Card.swift */; };
 		D4DA3B631C5FAE770038B6AD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DA3B621C5FAE770038B6AD /* AppDelegate.swift */; };
 		D4DA3B651C5FAE770038B6AD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DA3B641C5FAE770038B6AD /* ViewController.swift */; };
 		D4DA3B681C5FAE770038B6AD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4DA3B661C5FAE770038B6AD /* Main.storyboard */; };
@@ -34,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D40438851C624BAF003582A7 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Card.swift; path = Model/Card.swift; sourceTree = "<group>"; };
 		D4DA3B5F1C5FAE770038B6AD /* Blackjack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blackjack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4DA3B621C5FAE770038B6AD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D4DA3B641C5FAE770038B6AD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 				D4DA3B621C5FAE770038B6AD /* AppDelegate.swift */,
 				D4DA3B641C5FAE770038B6AD /* ViewController.swift */,
 				D4DA3B661C5FAE770038B6AD /* Main.storyboard */,
+				D40438851C624BAF003582A7 /* Card.swift */,
 				D4DA3B691C5FAE770038B6AD /* Assets.xcassets */,
 				D4DA3B6B1C5FAE770038B6AD /* LaunchScreen.storyboard */,
 				D4DA3B6E1C5FAE770038B6AD /* Info.plist */,
@@ -257,6 +260,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4DA3B651C5FAE770038B6AD /* ViewController.swift in Sources */,
+				D40438861C624BAF003582A7 /* Card.swift in Sources */,
 				D4DA3B631C5FAE770038B6AD /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -482,6 +486,7 @@
 				D4DA3B891C5FAE770038B6AD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D4DA3B8A1C5FAE770038B6AD /* Build configuration list for PBXNativeTarget "BlackjackTests" */ = {
 			isa = XCConfigurationList;
@@ -490,6 +495,7 @@
 				D4DA3B8C1C5FAE770038B6AD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D4DA3B8D1C5FAE770038B6AD /* Build configuration list for PBXNativeTarget "BlackjackUITests" */ = {
 			isa = XCConfigurationList;
@@ -498,6 +504,7 @@
 				D4DA3B8F1C5FAE770038B6AD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
