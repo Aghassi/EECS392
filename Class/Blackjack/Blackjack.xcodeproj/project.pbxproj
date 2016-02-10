@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D402A0291C6B84EA007FB634 /* MyCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D402A0281C6B84EA007FB634 /* MyCollectionViewController.swift */; };
+		D402A02B1C6B8742007FB634 /* CardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D402A02A1C6B8742007FB634 /* CardCollectionViewCell.swift */; };
 		D40438861C624BAF003582A7 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40438851C624BAF003582A7 /* Card.swift */; };
 		D4DA3B631C5FAE770038B6AD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DA3B621C5FAE770038B6AD /* AppDelegate.swift */; };
 		D4DA3B651C5FAE770038B6AD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DA3B641C5FAE770038B6AD /* ViewController.swift */; };
@@ -35,6 +37,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D402A0281C6B84EA007FB634 /* MyCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCollectionViewController.swift; sourceTree = "<group>"; };
+		D402A02A1C6B8742007FB634 /* CardCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardCollectionViewCell.swift; sourceTree = "<group>"; };
 		D40438851C624BAF003582A7 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Card.swift; path = Model/Card.swift; sourceTree = "<group>"; };
 		D4DA3B5F1C5FAE770038B6AD /* Blackjack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blackjack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4DA3B621C5FAE770038B6AD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -103,6 +107,8 @@
 				D4DA3B641C5FAE770038B6AD /* ViewController.swift */,
 				D4DA3B661C5FAE770038B6AD /* Main.storyboard */,
 				D40438851C624BAF003582A7 /* Card.swift */,
+				D402A0281C6B84EA007FB634 /* MyCollectionViewController.swift */,
+				D402A02A1C6B8742007FB634 /* CardCollectionViewCell.swift */,
 				D4DA3B691C5FAE770038B6AD /* Assets.xcassets */,
 				D4DA3B6B1C5FAE770038B6AD /* LaunchScreen.storyboard */,
 				D4DA3B6E1C5FAE770038B6AD /* Info.plist */,
@@ -259,8 +265,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D402A0291C6B84EA007FB634 /* MyCollectionViewController.swift in Sources */,
 				D4DA3B651C5FAE770038B6AD /* ViewController.swift in Sources */,
 				D40438861C624BAF003582A7 /* Card.swift in Sources */,
+				D402A02B1C6B8742007FB634 /* CardCollectionViewCell.swift in Sources */,
 				D4DA3B631C5FAE770038B6AD /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
