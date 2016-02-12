@@ -115,6 +115,55 @@
                                     <action selector="userClickStand:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lAh-Dl-Ux6"/>
                                 </connections>
                             </button>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="i6S-dr-WQj">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="8x0-L0-ufl">
+                                    <size key="itemSize" width="200" height="285"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="txA-dm-xK7" customClass="CollectionViewCell" customModule="BlackJack" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="200" height="285"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="edK-rz-HxF">
+                                                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                                        <rect key="frame" x="0.0" y="0.0" width="200" height="285"/>
+                                                    </variation>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <variation key="default">
+                                            <mask key="subviews">
+                                                <exclude reference="edK-rz-HxF"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=regular-widthClass=compact">
+                                            <mask key="subviews">
+                                                <include reference="edK-rz-HxF"/>
+                                            </mask>
+                                        </variation>
+                                        <connections>
+                                            <outlet property="image" destination="edK-rz-HxF" id="bPb-tr-XvA"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="20" y="49" width="360" height="285"/>
+                                </variation>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="cI4-2O-ews"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="QeZ-Qk-OBs"/>
+                                </connections>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" red="0.55350643937526955" green="1" blue="0.41086346720885947" alpha="1" colorSpace="calibratedRGB"/>
                         <variation key="default">
@@ -133,6 +182,7 @@
                                 <exclude reference="Nfd-tg-jx9"/>
                                 <exclude reference="JC4-UW-rB0"/>
                                 <exclude reference="jvM-74-4nc"/>
+                                <exclude reference="i6S-dr-WQj"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -151,12 +201,14 @@
                                 <include reference="Nfd-tg-jx9"/>
                                 <include reference="JC4-UW-rB0"/>
                                 <include reference="jvM-74-4nc"/>
+                                <include reference="i6S-dr-WQj"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
                         <outlet property="buttonHit" destination="JC4-UW-rB0" id="DvF-Fr-X2d"/>
                         <outlet property="buttonStand" destination="jvM-74-4nc" id="eDU-6y-KuL"/>
+                        <outlet property="collectionView" destination="i6S-dr-WQj" id="Ax5-QM-CIt"/>
                         <outlet property="dealerCard1" destination="IgY-si-mgn" id="qQz-kA-hvo"/>
                         <outlet property="dealerCard2" destination="8KG-3T-lMH" id="mIH-35-94C"/>
                         <outlet property="dealerCard3" destination="JCf-TF-C1u" id="aGz-eg-4V6"/>

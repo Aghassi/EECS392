@@ -24,6 +24,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var buttonHit: UIButton!
     @IBOutlet weak var buttonStand: UIButton!
     
+    @IBOutlet weak var collectionView: UICollectionView!
+  
     private var dealerCardView = [UIImageView] ()
     private var playerCardView = [UIImageView] ()
     private var gameModel : BJDGameModel
@@ -51,7 +53,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        dealerCardView = [dealerCard1, dealerCard2, dealerCard3, dealerCard4, dealerCard5 ]
+        dealerCardView = [dealerCard1, dealerCard2, dealerCard3, dealerCard4, dealerCard5]
         playerCardView = [playerCard1, playerCard2, playerCard3, playerCard4, playerCard5]
     }
 
@@ -77,7 +79,6 @@ class ViewController: UIViewController {
         buttonStand.enabled = false
         
         showSecondDealerCard()
-        
     }
     
     func showNextDealerCard(){
@@ -88,8 +89,6 @@ class ViewController: UIViewController {
         if gameModel.gameStage != .BJGameStageGameOver {
             let aSelector : Selector = "showNextDealerCard"
             performSelector(aSelector, withObject: nil, afterDelay: 0.5)
-            
-            //showNextDealerCard()
         }
     }
     
@@ -167,3 +166,72 @@ class ViewController: UIViewController {
 
 }
 
+private let reuseIdentifier = "Cell"
+
+extension ViewController: UICollectionViewDataSource {
+  /*
+  // MARK: - Navigation
+  
+  // In a storyboard-based application, you will often want to do a little preparation before navigation
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+  // Get the new view controller using [segue destinationViewController].
+  // Pass the selected object to the new view controller.
+  }
+  */
+  
+  // MARK: UICollectionViewDataSource
+  
+  func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    // #warning Incomplete implementation, return the number of sections
+    return 1
+  }
+  
+  
+  func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    // #warning Incomplete implementation, return the number of items
+    return 5
+  }
+  
+  func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! CollectionViewCell
+    
+    let index = indexPath.row
+    cell.image.image = dealerCardView[index].image
+    
+    cell.frame.origin = CGPoint(x: index, y: 0)
+    
+    return cell
+  }
+  
+  // MARK: UICollectionViewDelegate
+  
+  /*
+  // Uncomment this method to specify if the specified item should be highlighted during tracking
+  override func collectionView(collectionView: UICollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+  return true
+  }
+  */
+  
+  /*
+  // Uncomment this method to specify if the specified item should be selected
+  override func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+  return true
+  }
+  */
+  
+  /*
+  // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
+  override func collectionView(collectionView: UICollectionView, shouldShowMenuForItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+  return false
+  }
+  
+  override func collectionView(collectionView: UICollectionView, canPerformAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) -> Bool {
+  return false
+  }
+  
+  override func collectionView(collectionView: UICollectionView, performAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) {
+  
+  }
+  */
+  
+}

@@ -16,6 +16,7 @@
 		9F01ADAF1C5FAF6100711E9C /* BlackJackUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F01ADAE1C5FAF6100711E9C /* BlackJackUITests.swift */; };
 		9F01ADBD1C62494F00711E9C /* images in Resources */ = {isa = PBXBuildFile; fileRef = 9F01ADBC1C62494F00711E9C /* images */; };
 		9F01ADBF1C624C9000711E9C /* card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F01ADBE1C624C9000711E9C /* card.swift */; };
+		D49F48E41C6D90A200279E9A /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49F48E31C6D90A200279E9A /* CollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		9F01ADB01C5FAF6100711E9C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9F01ADBC1C62494F00711E9C /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
 		9F01ADBE1C624C9000711E9C /* card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = card.swift; sourceTree = "<group>"; };
+		D49F48E31C6D90A200279E9A /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 				9F01AD8E1C5FAF6000711E9C /* AppDelegate.swift */,
 				9F01AD901C5FAF6000711E9C /* ViewController.swift */,
 				9F01AD921C5FAF6000711E9C /* Main.storyboard */,
+				D49F48E31C6D90A200279E9A /* CollectionViewCell.swift */,
 				9F01ADBE1C624C9000711E9C /* card.swift */,
 				9F01AD951C5FAF6000711E9C /* Assets.xcassets */,
 				9F01ADBC1C62494F00711E9C /* images */,
@@ -263,6 +266,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D49F48E41C6D90A200279E9A /* CollectionViewCell.swift in Sources */,
 				9F01ADBF1C624C9000711E9C /* card.swift in Sources */,
 				9F01AD911C5FAF6000711E9C /* ViewController.swift in Sources */,
 				9F01AD8F1C5FAF6000711E9C /* AppDelegate.swift in Sources */,
@@ -490,6 +494,7 @@
 				9F01ADB51C5FAF6100711E9C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9F01ADB61C5FAF6100711E9C /* Build configuration list for PBXNativeTarget "BlackJackTests" */ = {
 			isa = XCConfigurationList;
@@ -498,6 +503,7 @@
 				9F01ADB81C5FAF6100711E9C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9F01ADB91C5FAF6100711E9C /* Build configuration list for PBXNativeTarget "BlackJackUITests" */ = {
 			isa = XCConfigurationList;
@@ -506,6 +512,7 @@
 				9F01ADBB1C5FAF6100711E9C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
