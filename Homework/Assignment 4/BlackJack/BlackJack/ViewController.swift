@@ -25,9 +25,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var buttonStand: UIButton!
     
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var playerCollectionView: UICollectionView!
   
-    private var dealerCardView = [UIImageView] ()
-    private var playerCardView = [UIImageView] ()
+    private var dealerCardView = [UIImageView]()
+    private var playerCardView = [UIImageView]()
     private var gameModel : BJDGameModel
     
     required init?(coder aDecoder: NSCoder) {
@@ -53,8 +54,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        dealerCardView = [dealerCard1, dealerCard2, dealerCard3, dealerCard4, dealerCard5]
-        playerCardView = [playerCard1, playerCard2, playerCard3, playerCard4, playerCard5]
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -113,6 +112,9 @@ class ViewController: UIViewController {
     
     func restartGame(){
         gameModel.resetGame()
+        playerCardView.removeAll()
+        dealerCardView.removeAll()
+      
         var card = gameModel.nextPlayerCard()
         card.isFaceUp = true
         card = gameModel.nextPlayerCard()
@@ -131,42 +133,60 @@ class ViewController: UIViewController {
         gameModel.updateGameStage()
     }
     
-    func renderCards(){
-        let maxCard = gameModel.maxPlayerCards
-        for  i in 0..<maxCard{
-            let dealerCV = dealerCardView[i]
-            let playerCV = playerCardView[i]
-            
-            if let dealerCard = gameModel.dealerCardAtIndex(i){
-                dealerCV.hidden = false
-                if dealerCard.isFaceUp{
-                    dealerCV.image = dealerCard.getCardImage()
-                }else{
-                    dealerCV.image = UIImage(named: "card-back.png")
-                }
-            }else{
-                dealerCV.hidden = true
-            }
-            
-            if let playerCard = gameModel.playerCardAtIndex(i){
-                playerCV.hidden = false
-                if playerCard.isFaceUp{
-                    playerCV.image = playerCard.getCardImage()
-                }else{
-                    playerCV.image = UIImage(named: "card-back.png")
-                }
-            }else{
-                playerCV.hidden = true
-            }
-            
-            
-        }
+  func renderCards(){
+    //        let maxCard = gameModel.maxPlayerCards
+    if dealerCardView.count == 0 {
+      addDealerCard(0)
+      addPlayerCard(0)
+      return
     }
-
-
+    
+    for i in 0..<dealerCardView.count {
+      addDealerCard(i)
+    }
+    
+    for i in 0..<playerCardView.count {
+      addPlayerCard(i)
+    }
+  }
+  
+  private func addDealerCard(index: Int) {
+    let dealerCV = UIImageView()
+    
+    if let dealerCard = gameModel.dealerCardAtIndex(index){
+      dealerCV.hidden = false
+      if dealerCard.isFaceUp{
+        dealerCV.image = dealerCard.getCardImage()
+      }else{
+        dealerCV.image = UIImage(named: "card-back.png")
+      }
+    }
+    
+    dealerCardView.append(dealerCV)
+    self.collectionView.reloadData()
+  }
+  
+  private func addPlayerCard(index: Int) {
+    let playerCV = UIImageView()
+    
+    if let playerCard = gameModel.playerCardAtIndex(index){
+      playerCV.hidden = false
+      if playerCard.isFaceUp{
+        playerCV.image = playerCard.getCardImage()
+      }else{
+        playerCV.image = UIImage(named: "card-back.png")
+      }
+      
+    }
+    
+    playerCardView.append(playerCV)
+    self.playerCollectionView.reloadData()
+  }
+  
 }
 
-private let reuseIdentifier = "Cell"
+private let reuseDealerIdentifier = "DealerCell"
+private let reusePlayerIdentifier = "PlayerCell"
 
 extension ViewController: UICollectionViewDataSource {
   /*
@@ -189,16 +209,34 @@ extension ViewController: UICollectionViewDataSource {
   
   func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     // #warning Incomplete implementation, return the number of items
+    if collectionView == self.collectionView {
+      return dealerCardView.count
+    }
+    else if collectionView == self.playerCollectionView {
+      print(playerCardView.count)
+      return playerCardView.count
+    }
+    
+    // if neither return 5
     return 5
   }
   
   func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! CollectionViewCell
-    
+    var cell = CollectionViewCell()
     let index = indexPath.row
-    cell.image.image = dealerCardView[index].image
     
-    cell.frame.origin = CGPoint(x: index, y: 0)
+    if collectionView == self.collectionView {
+      // dealer
+      cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseDealerIdentifier, forIndexPath: indexPath) as! CollectionViewCell
+      cell.image.image = dealerCardView[index].image
+    }
+    else if collectionView == self.playerCollectionView {
+      // player
+      cell = collectionView.dequeueReusableCellWithReuseIdentifier(reusePlayerIdentifier, forIndexPath: indexPath) as! CollectionViewCell
+      cell.image.image = playerCardView[index].image
+    }
+    
+    cell.frame.origin = CGPoint(x: index * 70, y: 0)
     
     return cell
   }
