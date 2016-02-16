@@ -9,160 +9,151 @@
 import UIKit
 
 class ViewController: UIViewController {
-    
-    @IBOutlet weak var dealerCard1: UIImageView!
-    @IBOutlet weak var dealerCard2: UIImageView!
-    @IBOutlet weak var dealerCard3: UIImageView!
-    @IBOutlet weak var dealerCard4: UIImageView!
-    @IBOutlet weak var dealerCard5: UIImageView!
-    @IBOutlet weak var playerCard1: UIImageView!
-    @IBOutlet weak var playerCard2: UIImageView!
-    @IBOutlet weak var playerCard3: UIImageView!
-    @IBOutlet weak var playerCard4: UIImageView!
-    @IBOutlet weak var playerCard5: UIImageView!
-
-    @IBOutlet weak var buttonHit: UIButton!
-    @IBOutlet weak var buttonStand: UIButton!
-    
-    @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var playerCollectionView: UICollectionView!
+  @IBOutlet weak var buttonHit: UIButton!
+  @IBOutlet weak var buttonStand: UIButton!
+  @IBOutlet weak var deckSize: UILabel!
   
-    private var dealerCardView = [UIImageView]()
-    private var playerCardView = [UIImageView]()
-    private var gameModel : BJDGameModel
+  @IBOutlet weak var collectionView: UICollectionView!
+  @IBOutlet weak var playerCollectionView: UICollectionView!
+  
+  private var dealerCardView = [UIImageView]()
+  private var playerCardView = [UIImageView]()
+  private var playerLocation = 0;
+  private var dealerLocation = 0;
+  private var gameModel : BJDGameModel
+  
+  required init?(coder aDecoder: NSCoder) {
+    gameModel = BJDGameModel()
+    super.init(coder : aDecoder)
     
-    required init?(coder aDecoder: NSCoder) {
-        gameModel = BJDGameModel()
-        super.init(coder : aDecoder)
-        
-        let aSelector : Selector = "handleNotificationGameDidEnd:"
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: aSelector, name: "BJNotificationGameDidEnd", object: gameModel)
+    let aSelector : Selector = "handleNotificationGameDidEnd:"
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: aSelector, name: "BJNotificationGameDidEnd", object: gameModel)
+  }
+  
+  func handleNotificationGameDidEnd(notification: NSNotification){
+    if let userInfo : Dictionary = notification.userInfo{
+      if let num = userInfo["didDealerWin"] {
+        let message = num.boolValue! ? "Dealer won!" : "You won!"
+        let alert = UIAlertController(title: "Game Over", message: message, preferredStyle: .Alert)
+        let alertAction = UIAlertAction(title: "Play again", style: .Default, handler: ({ (_: UIAlertAction)-> Void in self.restartGame() }))
+        alert.addAction(alertAction)
+        presentViewController(alert, animated: true, completion: nil)
+      }
+    }
+  }
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    // Do any additional setup after loading the view, typically from a nib.
+  }
+  
+  override func viewWillAppear(animated: Bool) {
+    super.viewWillAppear(animated)
+    restartGame()
+  }
+  @IBAction func userClickHit(sender: UIButton) {
+    let card = gameModel.nextPlayerCard()
+    card.isFaceUp = true
+    renderCards()
+    //...
+    gameModel.updateGameStage()
+    
+    if gameModel.gameStage == .BJGameStageDealer{
+      playDealerTurn()
     }
     
-    func handleNotificationGameDidEnd(notification: NSNotification){
-        if let userInfo : Dictionary = notification.userInfo{
-            if let num = userInfo["didDealerWin"] {
-                let message = num.boolValue! ? "Dealer won!" : "You won!"
-                let alert = UIAlertController(title: "Game Over", message: message, preferredStyle: .Alert)
-                let alertAction = UIAlertAction(title: "Play again", style: .Default, handler: ({ (_: UIAlertAction)-> Void in self.restartGame() }))
-                alert.addAction(alertAction)
-                presentViewController(alert, animated: true, completion: nil)
-            }
-        }
-    }
+  }
+  
+  func playDealerTurn(){
+    buttonHit.enabled = false
+    buttonStand.enabled = false
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+    showSecondDealerCard()
+  }
+  
+  func showNextDealerCard(){
+    let card = gameModel.nextDealerCard()
+    card.isFaceUp = true
+    renderCards()
+    gameModel.updateGameStage()
+    if gameModel.gameStage != .BJGameStageGameOver {
+      let aSelector : Selector = "showNextDealerCard"
+      performSelector(aSelector, withObject: nil, afterDelay: 0.5)
     }
-
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        restartGame()
+  }
+  
+  func showSecondDealerCard(){
+    let card = gameModel.nextDealerCard()
+    card.isFaceUp = true
+    renderCards()
+    gameModel.updateGameStage()
+    if(gameModel.gameStage != .BJGameStageGameOver){
+      let aSelector : Selector = "showNextDealerCard"
+      performSelector(aSelector, withObject: nil, afterDelay: 0.5)
+      //showNextDealerCard()
     }
-    @IBAction func userClickHit(sender: UIButton) {
-        let card = gameModel.nextPlayerCard()
-        card.isFaceUp = true
-        renderCards()
-        //...
-        gameModel.updateGameStage()
-        
-        if gameModel.gameStage == .BJGameStageDealer{
-            playDealerTurn()
-        }
-        
-    }
+  }
+  
+  
+  @IBAction func userClickStand(sender: UIButton) {
+    gameModel.gameStage = .BJGameStageDealer
+    playDealerTurn()
+  }
+  
+  func restartGame(){
+    gameModel.resetGame()
+    playerCardView.removeAll()
+    dealerCardView.removeAll()
+    playerLocation = 0
+    dealerLocation = 0
     
-    func playDealerTurn(){
-        buttonHit.enabled = false
-        buttonStand.enabled = false
-        
-        showSecondDealerCard()
-    }
+    var card = gameModel.nextPlayerCard()
+    card.isFaceUp = true
+    card = gameModel.nextPlayerCard()
+    card.isFaceUp = true
     
-    func showNextDealerCard(){
-        let card = gameModel.nextDealerCard()
-        card.isFaceUp = true
-        renderCards()
-        gameModel.updateGameStage()
-        if gameModel.gameStage != .BJGameStageGameOver {
-            let aSelector : Selector = "showNextDealerCard"
-            performSelector(aSelector, withObject: nil, afterDelay: 0.5)
-        }
-    }
+    card = gameModel.nextDealerCard()
+    card.isFaceUp = true
+    card = gameModel.nextDealerCard()
+    card.isFaceUp = true
     
-    func showSecondDealerCard(){
-        if let card = gameModel.lastDealerCard(){
-            card.isFaceUp = true
-            renderCards()
-            gameModel.updateGameStage()
-            if(gameModel.gameStage != .BJGameStageGameOver){
-                let aSelector : Selector = "showNextDealerCard"
-                performSelector(aSelector, withObject: nil, afterDelay: 0.5)
-                //showNextDealerCard()
-            }
-        }
-    }
+    renderCards()
     
+    buttonHit.enabled = true
+    buttonStand.enabled = true
     
-    @IBAction func userClickStand(sender: UIButton) {
-        gameModel.gameStage = .BJGameStageDealer
-        playDealerTurn()
-    }
-    
-    func restartGame(){
-        gameModel.resetGame()
-        playerCardView.removeAll()
-        dealerCardView.removeAll()
-      
-        var card = gameModel.nextPlayerCard()
-        card.isFaceUp = true
-        card = gameModel.nextPlayerCard()
-        card.isFaceUp = true
-        
-        card = gameModel.nextDealerCard()
-        card.isFaceUp = true
-        card = gameModel.nextDealerCard()
-        
-        renderCards()
-        
-        buttonHit.enabled = true
-        buttonStand.enabled = true
-      
-        // check to see if the player won on the first hand.
-        gameModel.updateGameStage()
-    }
-    
+    // check to see if the player won on the first hand.
+    gameModel.updateGameStage()
+  }
+  
   func renderCards(){
-    //        let maxCard = gameModel.maxPlayerCards
-    if dealerCardView.count == 0 {
-      addDealerCard(0)
-      addPlayerCard(0)
-      return
+    if (dealerLocation <= 0) {
+      for i in 0..<2 {
+        addPlayerCard(i)
+        addDealerCard(i)
+      }
     }
-    
-    for i in 0..<dealerCardView.count {
-      addDealerCard(i)
+    else {
+      addPlayerCard(playerLocation)
+      addDealerCard(dealerLocation)
     }
-    
-    for i in 0..<playerCardView.count {
-      addPlayerCard(i)
-    }
+    deckSize.text = "Remaining Cards: \(gameModel.deckSize)"
   }
   
   private func addDealerCard(index: Int) {
     let dealerCV = UIImageView()
     
     if let dealerCard = gameModel.dealerCardAtIndex(index){
-      dealerCV.hidden = false
       if dealerCard.isFaceUp{
         dealerCV.image = dealerCard.getCardImage()
       }else{
         dealerCV.image = UIImage(named: "card-back.png")
       }
+      
+      dealerCardView.append(dealerCV)
+      dealerLocation++
     }
-    
-    dealerCardView.append(dealerCV)
+
     self.collectionView.reloadData()
   }
   
@@ -170,16 +161,16 @@ class ViewController: UIViewController {
     let playerCV = UIImageView()
     
     if let playerCard = gameModel.playerCardAtIndex(index){
-      playerCV.hidden = false
       if playerCard.isFaceUp{
         playerCV.image = playerCard.getCardImage()
       }else{
         playerCV.image = UIImage(named: "card-back.png")
       }
       
+      playerCardView.append(playerCV)
+      playerLocation++
     }
-    
-    playerCardView.append(playerCV)
+
     self.playerCollectionView.reloadData()
   }
   
@@ -240,6 +231,7 @@ extension ViewController: UICollectionViewDataSource {
     
     return cell
   }
+  
   
   // MARK: UICollectionViewDelegate
   
