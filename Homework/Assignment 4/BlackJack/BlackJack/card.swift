@@ -100,6 +100,8 @@ class BJDGameModel{
   private var cards = [Card]()
   private var playerCards = [Card]()
   private var dealerCards = [Card]()
+  var numberOfDecks = 1
+  var threshhold : Int? = nil
   var deckSize : Int {
       return self.cards.count
   }
@@ -115,12 +117,19 @@ class BJDGameModel{
   }
   
   func resetGame(){
-    self.cards = Card.generateAPackOfCards()
+    if cards.count < threshhold {
+      // reset deck
+      self.cards.removeAll()
+      for _ in 0..<numberOfDecks {
+        self.cards += Card.generateAPackOfCards()
+      }
+    }
     //shuffle()
     self.cards.shuffleInPlace()
     playerCards = [Card]()
     dealerCards = [Card]()
     gameStage = .BJGameStagePlayer
+    
   }
   
   func nextPlayerCard() -> Card{
@@ -256,6 +265,15 @@ class BJDGameModel{
   
   func lastDealerCard() -> Card?{
     return dealerCards.last
+  }
+  
+  func isThreshhold() -> Bool {
+    if let limit = threshhold {
+      return cards.count == limit
+    }
+    else {
+      return false
+    }
   }
   
 }
