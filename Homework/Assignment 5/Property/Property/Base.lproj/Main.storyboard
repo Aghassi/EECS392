@@ -92,12 +92,12 @@
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="select state" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rrg-Gb-QIr">
                                         <rect key="frame" x="230" y="0.0" width="97" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="select country" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dJL-AG-2Pd">
                                         <rect key="frame" x="446" y="0.0" width="114" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
                                     </textField>
                                 </subviews>
                             </stackView>
@@ -325,10 +325,12 @@
                     </view>
                     <connections>
                         <outlet property="addressTextField" destination="mDX-fK-KSc" id="LoW-i2-Q2Y"/>
+                        <outlet property="countryTextField" destination="dJL-AG-2Pd" id="BQU-Dm-bSO"/>
                         <outlet property="nameTextField" destination="vNr-Se-3aK" id="QsG-j7-UAv"/>
                         <outlet property="ownersNameTextField" destination="I0f-4J-vKt" id="Vmy-oH-CHe"/>
                         <outlet property="purchaseDateTextField" destination="hpD-hE-xMn" id="HDp-6w-UmK"/>
                         <outlet property="purchasePriceTextField" destination="mqC-bj-8Es" id="JOP-g1-gu8"/>
+                        <outlet property="stateTextField" destination="rrg-Gb-QIr" id="02e-jU-ZTx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

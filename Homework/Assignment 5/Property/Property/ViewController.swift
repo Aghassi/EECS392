@@ -12,9 +12,70 @@ class ViewController: UIViewController, UITextFieldDelegate {
     // MARK: Outlets
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var addressTextField: UITextField!
+    @IBOutlet weak var stateTextField: UITextField!
+    @IBOutlet weak var countryTextField: UITextField!
     @IBOutlet weak var purchaseDateTextField: UITextField!
     @IBOutlet weak var purchasePriceTextField: UITextField!
     @IBOutlet weak var ownersNameTextField: UITextField!
+    
+    // List of states for stateTextField
+    let state = [ "AK",
+        "AL",
+        "AR",
+        "AS",
+        "AZ",
+        "CA",
+        "CO",
+        "CT",
+        "DC",
+        "DE",
+        "FL",
+        "GA",
+        "GU",
+        "HI",
+        "IA",
+        "ID",
+        "IL",
+        "IN",
+        "KS",
+        "KY",
+        "LA",
+        "MA",
+        "MD",
+        "ME",
+        "MI",
+        "MN",
+        "MO",
+        "MS",
+        "MT",
+        "NC",
+        "ND",
+        "NE",
+        "NH",
+        "NJ",
+        "NM",
+        "NV",
+        "NY",
+        "OH",
+        "OK",
+        "OR",
+        "PA",
+        "PR",
+        "RI",
+        "SC",
+        "SD",
+        "TN",
+        "TX",
+        "UT",
+        "VA",
+        "VI",
+        "VT",
+        "WA",
+        "WI",
+        "WV",
+        "WY"]
+    
+    var countries: [String] = []
     
     // MARK: Buttons
     @IBAction func purchaseDateField(sender: UITextField) {
@@ -30,10 +91,30 @@ class ViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         fields = [nameTextField, addressTextField, purchaseDateTextField, purchasePriceTextField, ownersNameTextField]
         
+        // Populate countries
+        for code in NSLocale.ISOCountryCodes() as [String] {
+            let id = NSLocale.localeIdentifierFromComponents([NSLocaleCountryCode: code])
+            let name = NSLocale(localeIdentifier: "en_UK").displayNameForKey(NSLocaleIdentifier, value: id) ?? "Country not found for code: \(code)"
+            countries.append(name)
+        }
+        
         // Create and set a date picker for the date field
         let datePicker = UIDatePicker()
         datePicker.datePickerMode = .Date
+        
+        let statePicker = UIPickerView()
+        statePicker.dataSource = self
+        statePicker.delegate = self
+        
+        let countryPicker = UIPickerView()
+        countryPicker.dataSource = self
+        countryPicker.delegate = self
+        
+        
+        stateTextField.inputView = statePicker
+        countryTextField.inputView = countryPicker
         purchaseDateTextField.inputView = datePicker
+        
         datePicker.addTarget(self, action: "handleDatePicker:", forControlEvents: .ValueChanged)
     }
     
@@ -150,3 +231,45 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
 }
 
+// MARK: UIPickerViewDataSource
+extension ViewController: UIPickerViewDataSource {
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if pickerView  == stateTextField.inputView as! UIPickerView {
+            return state.count
+        }
+        else if pickerView == countryTextField.inputView as! UIPickerView {
+            return countries.count
+        }
+        else {
+            return 0
+        }
+    }
+}
+
+// MARK: UIPickerViewDelegate
+extension ViewController: UIPickerViewDelegate {
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if pickerView  == stateTextField.inputView as! UIPickerView {
+            return state[row]
+        }
+        else if pickerView == countryTextField.inputView as! UIPickerView {
+            return countries[row]
+        }
+        else {
+            return ""
+        }
+    }
+    
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if pickerView  == stateTextField.inputView as! UIPickerView {
+            stateTextField.text = state[row]
+        }
+        else if pickerView == countryTextField.inputView as! UIPickerView {
+            countryTextField.text = countries[row]
+        }
+    }
+}
