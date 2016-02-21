@@ -89,7 +89,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     var fields: [UITextField] = []
     
     override func viewDidLoad() {
-        fields = [nameTextField, addressTextField, purchaseDateTextField, purchasePriceTextField, ownersNameTextField]
+        fields = [nameTextField, addressTextField, stateTextField, countryTextField, purchaseDateTextField, purchasePriceTextField, ownersNameTextField]
         
         // Populate countries
         for code in NSLocale.ISOCountryCodes() as [String] {
@@ -112,7 +112,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         
         stateTextField.inputView = statePicker
+        stateTextField.inputAccessoryView = appendAccessoryButtonToKeyboard()
         countryTextField.inputView = countryPicker
+        countryTextField.inputAccessoryView = appendAccessoryButtonToKeyboard()
         purchaseDateTextField.inputView = datePicker
         
         datePicker.addTarget(self, action: "handleDatePicker:", forControlEvents: .ValueChanged)
@@ -138,6 +140,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
         case let x where x == nameTextField:
             addressTextField.becomeFirstResponder()
         case let x where x == addressTextField:
+            stateTextField.becomeFirstResponder()
+        case let x where x == stateTextField:
+            countryTextField.becomeFirstResponder()
+        case let x where x == countryTextField:
             purchaseDateTextField.becomeFirstResponder()
         case let x where x == purchaseDateTextField:
             purchasePriceTextField.becomeFirstResponder()
@@ -148,6 +154,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
         return true
     }
+    
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         textField.inputAccessoryView = appendAccessoryButtonToKeyboard()
         return true
@@ -223,7 +230,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     func createData() {
         let property = Property()
         property.name = nameTextField.text!
-        property.address = addressTextField.text!
+        property.address = "\(addressTextField.text), \(stateTextField.text), \(countryTextField.text)"
         property.propertyDate = purchaseDateTextField.text!
         property.price = Double(purchasePriceTextField.text!)!
         property.owner = ownersNameTextField.text!
