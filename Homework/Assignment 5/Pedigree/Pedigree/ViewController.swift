@@ -10,8 +10,17 @@ import UIKit
 
 class ViewController: UIViewController {
   var pedigree: [PedigreeData] = []
+  var chart: [UIView] = []
   var rendered: [Int] = []
 
+  @IBOutlet weak var pedigreeOne: UIView!
+  @IBOutlet weak var pedigreeTwo: UIView!
+  @IBOutlet weak var pedigreeThree: UIView!
+  @IBOutlet weak var pedigreeFour: UIView!
+  @IBOutlet weak var pedigreeFive: UIView!
+  @IBOutlet weak var pedigreeSix: UIView!
+  
+  
   override func viewDidLoad() {
     super.viewDidLoad()
 
@@ -45,6 +54,7 @@ class ViewController: UIViewController {
     
     
     pedigree = [person, personTwo, personThree, personFour, personFive, personSix]
+    chart = [pedigreeOne, pedigreeTwo, pedigreeThree, pedigreeFour, pedigreeFive, pedigreeSix]
     
     for person in pedigree {
       if person.fatherID > 0 && person.motherID > 0 {
@@ -53,7 +63,47 @@ class ViewController: UIViewController {
       }
     }
     
-    renderPedigreeChart()
+    for person in pedigree {
+      chart[person.individualID-1].backgroundColor = UIColor.clearColor()
+      let y = chart[person.individualID-1].layer.frame.origin.y
+      let x = chart[person.individualID-1].layer.frame.origin.x
+      
+      let midX = chart[person.individualID-1].layer.frame.midX
+      let midY = chart[person.individualID-1].layer.frame.midY
+      
+      let radius = chart[person.individualID-1].layer.frame.width / 2.0
+      let length = chart[person.individualID-1].layer.frame.width
+      
+      let start = CGPoint(x: midX, y: midY)
+      
+      // male
+      if person.gender == 1 {
+        renderFemale(x, y: midY, radius: radius, person: person)
+      } else {
+        renderMale(x, y: y, edgeLength: length, person: person)
+      }
+      
+      if person.marriedTo > 0 {
+        
+        let endMidX = chart[person.marriedTo-1].layer.frame.midX
+        let endMidY = chart[person.marriedTo-1].layer.frame.midY
+        let end = CGPoint(x: endMidX, y: endMidY)
+        drawLine(start, end: end)
+      }
+      
+      if person.fatherID > 0 && person.motherID > 0 {
+        let fatherOriginMid = CGPoint(x: chart[person.fatherID-1].layer.frame.midX, y: chart[person.fatherID-1].layer.frame.midY)
+        let motherOriginMid = CGPoint(x: chart[person.motherID-1].layer.frame.midX, y: chart[person.motherID-1].layer.frame.midY)
+        
+        let midPointX = (fatherOriginMid.x + motherOriginMid.x) / 2.0
+        let midPointY = (fatherOriginMid.y + motherOriginMid.y) / 2.0
+        
+        let end = CGPoint(x: midPointX, y: midPointY)
+        
+        drawLine(start, end: end)
+      }
+    }
+    
   }
 
   override func didReceiveMemoryWarning() {
@@ -61,81 +111,7 @@ class ViewController: UIViewController {
     // Dispose of any resources that can be recreated.
   }
   
-  /**
-    Render each square on the same line as long as the people don't have parents
-    Each new line will consist of relatives (we assume the list is ordered as such)
-    If we tag each layer before we add them to the view, we can query the tags by individualID to see if the 
-    person people are married to already is rendered
-  */
   
-  func renderPedigreeChart() {
-    let edgeLength = (self.view.bounds.width + self.view.bounds.height) / 20.0
-    
-    var originX = CGFloat(20.0)
-    var originY = CGFloat(20.0)
-  
-    for person in pedigree {
-      if (person.fatherID == 0 && person.motherID == 0) {
-        // male
-        if (person.gender == 1) {
-          renderMale(originX, y: originY, edgeLength: edgeLength, person: person)
-          
-          if (person.children.count > 0) {
-            for child in person.children {
-              if !rendered.contains(child) {
-                var childOriginY: CGFloat = 0.0
-                
-                if pedigree[child].gender == 1 {
-                  childOriginY = originY + edgeLength + 25.0
-                  renderMale(originX, y: childOriginY, edgeLength: edgeLength, person: pedigree[child])
-                }
-                else {
-                  let radius = edgeLength/1.8
-                  childOriginY = originY + radius + 75.0
-                  renderFemale(originX, y: childOriginY, radius: radius, person: pedigree[child])
-                }
-                let start = CGPoint(x: originX + edgeLength/2, y: childOriginY)
-                let origin = CGPoint(x: originX + edgeLength/2, y: originY)
-                drawLine(start, end: origin)
-                rendered.append(child)
-              }
-            }
-          }
-        }
-        // female
-        else {
-          let origin = CGPoint(x: originX + 30, y: originY + 30.0)
-          let radius = edgeLength/1.8
-          drawCircle(origin, radius: radius, person: person)
-          rendered.append(person.individualID)
-          
-          if (person.children.count > 0) {
-            for child in person.children {
-              if !rendered.contains(child) {
-                var childOriginY: CGFloat = 0.0
-                
-                if pedigree[child].gender == 1 {
-                  childOriginY = originY + edgeLength + 25.0
-                  renderMale(originX, y: childOriginY, edgeLength: edgeLength, person: pedigree[child])
-                }
-                else {
-                  let radius = edgeLength/1.8
-                  childOriginY = originY + radius + 75.0
-                  renderFemale(originX, y: childOriginY, radius: radius, person: pedigree[child])
-                }
-                let start = CGPoint(x: originX + edgeLength/2, y: childOriginY)
-                let origin = CGPoint(x: originX + edgeLength/2, y: originY)
-                drawLine(start, end: origin)
-                rendered.append(child)
-              }
-            }
-          }
-        }
-        
-       originX += originX + edgeLength + 10
-      }
-    }
-  }
   
   func renderMale(x: CGFloat, y: CGFloat, edgeLength: CGFloat, person: PedigreeData) {
     let rect = CGRectMake(x, y, edgeLength, edgeLength)
