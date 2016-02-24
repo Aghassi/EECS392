@@ -288,6 +288,7 @@
 				D49616031C7CEDB2005E44CA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

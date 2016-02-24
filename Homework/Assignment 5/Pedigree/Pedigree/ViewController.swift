@@ -44,12 +44,62 @@ class ViewController: UIViewController {
     
     
     pedigree = [person, personTwo, personThree, personFour, personFive, personSix]
-    // Do any additional setup after loading the view, typically from a nib.
+    
+    renderPedigreeChart()
   }
 
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
+  }
+  
+  /**
+    Render each square on the same line as long as the people don't have parents
+    Each new line will consist of relatives (we assume the list is ordered as such)
+    If we tag each layer before we add them to the view, we can query the tags by individualID to see if the 
+    person people are married to already is rendered
+  */
+  
+  func renderPedigreeChart() {
+    let edgeLength = (self.view.bounds.width + self.view.bounds.height) / 20.0
+    
+    var originX = CGFloat(20.0);
+    var originY = CGFloat(20.0);
+
+    for person in pedigree {
+      if (person.fatherID == 0 && person.motherID == 0) {
+        let rect = CGRectMake(originX, originY, edgeLength, edgeLength)
+        drawRect(rect, person: person)
+        originX += originX + edgeLength + 10
+      } else {
+        originX = CGFloat(20.0)
+        // draw rectangle and connect line
+        originY += originY + edgeLength + 10
+      }
+    }
+  }
+  
+  func drawRect(rect: CGRect, person: PedigreeData) {
+    if person.affected > 0 {
+      let path = UIBezierPath(rect: rect)
+      let shapeLayer = CAShapeLayer()
+      shapeLayer.path = path.CGPath
+      shapeLayer.strokeColor = UIColor.redColor().CGColor
+      shapeLayer.fillColor = UIColor.redColor().CGColor
+      shapeLayer.lineWidth = 2.0
+      shapeLayer.name = person.individualID.description
+      view.layer.addSublayer(shapeLayer)
+    }
+    else {
+      let path = UIBezierPath(rect: rect)
+      let shapeLayer = CAShapeLayer()
+      shapeLayer.path = path.CGPath
+      shapeLayer.strokeColor = UIColor.redColor().CGColor
+      shapeLayer.fillColor = UIColor.clearColor().CGColor
+      shapeLayer.lineWidth = 2.0
+      shapeLayer.name = person.individualID.description
+      view.layer.addSublayer(shapeLayer)
+    }
   }
 
 
