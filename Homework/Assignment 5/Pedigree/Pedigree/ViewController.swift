@@ -83,17 +83,20 @@ class ViewController: UIViewController {
           if (person.children.count > 0) {
             for child in person.children {
               if !rendered.contains(child) {
+                var childOriginY: CGFloat = 0.0
                 
                 if pedigree[child].gender == 1 {
-                  let childOriginY = originY + edgeLength + 25.0
+                  childOriginY = originY + edgeLength + 25.0
                   renderMale(originX, y: childOriginY, edgeLength: edgeLength, person: pedigree[child])
                 }
                 else {
                   let radius = edgeLength/1.8
-                  let childOriginY = originY + radius + 75.0
+                  childOriginY = originY + radius + 75.0
                   renderFemale(originX, y: childOriginY, radius: radius, person: pedigree[child])
                 }
-
+                let start = CGPoint(x: originX + edgeLength/2, y: childOriginY)
+                let origin = CGPoint(x: originX + edgeLength/2, y: originY)
+                drawLine(start, end: origin)
                 rendered.append(child)
               }
             }
@@ -109,17 +112,20 @@ class ViewController: UIViewController {
           if (person.children.count > 0) {
             for child in person.children {
               if !rendered.contains(child) {
+                var childOriginY: CGFloat = 0.0
                 
                 if pedigree[child].gender == 1 {
-                  let childOriginY = originY + edgeLength + 25.0
+                  childOriginY = originY + edgeLength + 25.0
                   renderMale(originX, y: childOriginY, edgeLength: edgeLength, person: pedigree[child])
                 }
                 else {
                   let radius = edgeLength/1.8
-                  let childOriginY = originY + radius + 75.0
+                  childOriginY = originY + radius + 75.0
                   renderFemale(originX, y: childOriginY, radius: radius, person: pedigree[child])
                 }
-                
+                let start = CGPoint(x: originX + edgeLength/2, y: childOriginY)
+                let origin = CGPoint(x: originX + edgeLength/2, y: originY)
+                drawLine(start, end: origin)
                 rendered.append(child)
               }
             }
@@ -185,13 +191,14 @@ class ViewController: UIViewController {
     let path = UIBezierPath()
     path.moveToPoint(start)
     path.addLineToPoint(end)
-    path.stroke()
+    path.closePath()
     
     let shapeLayer = CAShapeLayer()
-    shapeLayer.path = path.CGPath
     shapeLayer.strokeColor = UIColor.blackColor().CGColor
-    
+    shapeLayer.path = path.CGPath
+    shapeLayer.lineWidth = 1.0
     view.layer.addSublayer(shapeLayer)
+
   }
 }
 
