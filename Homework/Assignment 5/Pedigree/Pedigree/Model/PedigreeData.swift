@@ -17,6 +17,7 @@ class PedigreeData: NSObject {
   var gender: Int = 0
   var affected: Int = 0
   var marriedTo: Int = 0  // maps to ID of individual the person is married to
+  var children: [Int] = []
   
   init(individual: Int, father: Int, mother: Int, gender: Int) {
     super.init()

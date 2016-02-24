@@ -10,6 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
   var pedigree: [PedigreeData] = []
+  var rendered: [Int] = []
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -45,6 +46,13 @@ class ViewController: UIViewController {
     
     pedigree = [person, personTwo, personThree, personFour, personFive, personSix]
     
+    for person in pedigree {
+      if person.fatherID > 0 && person.motherID > 0 {
+        pedigree[person.fatherID-1].children.append(person.individualID-1)
+        pedigree[person.motherID-1].children.append(person.individualID-1)
+      }
+    }
+    
     renderPedigreeChart()
   }
 
@@ -63,45 +71,127 @@ class ViewController: UIViewController {
   func renderPedigreeChart() {
     let edgeLength = (self.view.bounds.width + self.view.bounds.height) / 20.0
     
-    var originX = CGFloat(20.0);
-    var originY = CGFloat(20.0);
-
+    var originX = CGFloat(20.0)
+    var originY = CGFloat(20.0)
+  
     for person in pedigree {
       if (person.fatherID == 0 && person.motherID == 0) {
-        let rect = CGRectMake(originX, originY, edgeLength, edgeLength)
-        drawRect(rect, person: person)
-        originX += originX + edgeLength + 10
-      } else {
-        originX = CGFloat(20.0)
-        // draw rectangle and connect line
-        originY += originY + edgeLength + 10
+        // male
+        if (person.gender == 1) {
+          renderMale(originX, y: originY, edgeLength: edgeLength, person: person)
+          
+          if (person.children.count > 0) {
+            for child in person.children {
+              if !rendered.contains(child) {
+                
+                if pedigree[child].gender == 1 {
+                  let childOriginY = originY + edgeLength + 25.0
+                  renderMale(originX, y: childOriginY, edgeLength: edgeLength, person: pedigree[child])
+                }
+                else {
+                  let radius = edgeLength/1.8
+                  let childOriginY = originY + radius + 75.0
+                  renderFemale(originX, y: childOriginY, radius: radius, person: pedigree[child])
+                }
+
+                rendered.append(child)
+              }
+            }
+          }
+        }
+        // female
+        else {
+          let origin = CGPoint(x: originX + 30, y: originY + 30.0)
+          let radius = edgeLength/1.8
+          drawCircle(origin, radius: radius, person: person)
+          rendered.append(person.individualID)
+          
+          if (person.children.count > 0) {
+            for child in person.children {
+              if !rendered.contains(child) {
+                
+                if pedigree[child].gender == 1 {
+                  let childOriginY = originY + edgeLength + 25.0
+                  renderMale(originX, y: childOriginY, edgeLength: edgeLength, person: pedigree[child])
+                }
+                else {
+                  let radius = edgeLength/1.8
+                  let childOriginY = originY + radius + 75.0
+                  renderFemale(originX, y: childOriginY, radius: radius, person: pedigree[child])
+                }
+                
+                rendered.append(child)
+              }
+            }
+          }
+        }
+        
+       originX += originX + edgeLength + 10
       }
     }
   }
   
-  func drawRect(rect: CGRect, person: PedigreeData) {
-    if person.affected > 0 {
-      let path = UIBezierPath(rect: rect)
-      let shapeLayer = CAShapeLayer()
-      shapeLayer.path = path.CGPath
-      shapeLayer.strokeColor = UIColor.redColor().CGColor
-      shapeLayer.fillColor = UIColor.redColor().CGColor
-      shapeLayer.lineWidth = 2.0
-      shapeLayer.name = person.individualID.description
-      view.layer.addSublayer(shapeLayer)
-    }
-    else {
-      let path = UIBezierPath(rect: rect)
-      let shapeLayer = CAShapeLayer()
-      shapeLayer.path = path.CGPath
-      shapeLayer.strokeColor = UIColor.redColor().CGColor
-      shapeLayer.fillColor = UIColor.clearColor().CGColor
-      shapeLayer.lineWidth = 2.0
-      shapeLayer.name = person.individualID.description
-      view.layer.addSublayer(shapeLayer)
-    }
+  func renderMale(x: CGFloat, y: CGFloat, edgeLength: CGFloat, person: PedigreeData) {
+    let rect = CGRectMake(x, y, edgeLength, edgeLength)
+    drawRect(rect, person: person)
+    rendered.append(person.individualID)
+  }
+  
+  func renderFemale(x: CGFloat, y: CGFloat, radius: CGFloat, person: PedigreeData) {
+    let origin = CGPoint(x: x + 30, y: y)
+    drawCircle(origin, radius: radius, person: person)
   }
 
+  
+  func drawRect(rect: CGRect, person: PedigreeData) {
+    let path = UIBezierPath(rect: rect)
+    let shapeLayer = CAShapeLayer()
+    shapeLayer.path = path.CGPath
+    
+    if person.affected > 0 {
+      shapeLayer.strokeColor = UIColor.redColor().CGColor
+      shapeLayer.fillColor = UIColor.redColor().CGColor
+    }
+    else {
+      shapeLayer.strokeColor = UIColor.redColor().CGColor
+      shapeLayer.fillColor = UIColor.clearColor().CGColor
+    }
+    
+    shapeLayer.lineWidth = 2.0
+    shapeLayer.name = person.individualID.description
+    view.layer.addSublayer(shapeLayer)
+  }
 
+  func drawCircle(origin: CGPoint, radius: CGFloat, person: PedigreeData) {
+    let path = UIBezierPath(arcCenter: origin, radius: radius, startAngle: 0, endAngle: CGFloat(2.0 * M_PI), clockwise: true)
+    let shapeLayer = CAShapeLayer()
+    shapeLayer.path = path.CGPath
+    
+    if person.affected > 0 {
+      shapeLayer.strokeColor = UIColor.redColor().CGColor
+      shapeLayer.fillColor = UIColor.redColor().CGColor
+    }
+    else {
+      shapeLayer.strokeColor = UIColor.redColor().CGColor
+      shapeLayer.fillColor = UIColor.clearColor().CGColor
+    }
+
+    shapeLayer.lineWidth = 2.0
+    shapeLayer.name = person.individualID.description
+    view.layer.addSublayer(shapeLayer)
+  }
+  
+  func drawLine(start: CGPoint, end: CGPoint) {
+    let path = UIBezierPath()
+    path.moveToPoint(start)
+    path.addLineToPoint(end)
+    path.stroke()
+    
+    let shapeLayer = CAShapeLayer()
+    shapeLayer.path = path.CGPath
+    shapeLayer.strokeColor = UIColor.blackColor().CGColor
+    
+    view.layer.addSublayer(shapeLayer)
+  }
 }
 
