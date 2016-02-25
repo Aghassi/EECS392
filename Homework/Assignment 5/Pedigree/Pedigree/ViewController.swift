@@ -78,9 +78,9 @@ class ViewController: UIViewController {
       
       // male
       if person.gender == 1 {
-        renderFemale(x, y: midY, radius: radius, person: person)
-      } else {
         renderMale(x, y: y, edgeLength: length, person: person)
+      } else {
+        renderFemale(x, y: midY, radius: radius, person: person)
       }
       
       if person.marriedTo > 0 {
