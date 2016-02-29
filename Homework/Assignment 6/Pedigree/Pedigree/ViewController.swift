@@ -75,7 +75,7 @@ class ViewController: UIViewController {
    */
   func renderPedigree() {
     for person in pedigree {
-//      chart[person.individualID-1].backgroundColor = UIColor.clearColor()
+      chart[person.individualID-1].backgroundColor = UIColor.clearColor()
 //      let y = chart[person.individualID-1].layer.frame.origin.y
       let y = chart[person.individualID-1].bounds.origin.y
 //      let x = chart[person.individualID-1].layer.frame.origin.x
@@ -88,8 +88,11 @@ class ViewController: UIViewController {
       
       let length = chart[person.individualID-1].bounds.width
       let radius = length / 2.0
+
       
-//      let start = CGPoint(x: midX, y: midY)
+      let startMidX = chart[person.individualID-1].center.x
+      let startMidY = chart[person.individualID-1].center.y
+      let start = CGPoint(x: startMidX, y: startMidY)
       
       // male
       if person.gender == 1 {
@@ -98,15 +101,15 @@ class ViewController: UIViewController {
         renderFemale(midX, y: midY, radius: radius, person: person)
       }
       
-//      if person.marriedTo > 0 {
-//        let endMidX = chart[person.marriedTo-1].layer.frame.midX
-//        let endMidY = chart[person.marriedTo-1].layer.frame.midY
-//        let end = CGPoint(x: endMidX, y: endMidY)
-//        let line = ShapeRenderer.drawLine(start, end: end)
-//        let view = chart[person.individualID-1]
-//        view.layer.addSublayer(line)
-//      }
-//      
+      if person.marriedTo > 0 && !rendered.contains(person.marriedTo){
+        let endMidX = chart[person.marriedTo-1].center.x
+        let endMidY = chart[person.marriedTo-1].center.y
+        let end = CGPoint(x: endMidX, y: endMidY)
+        let line = ShapeRenderer.drawLine(start, end: end)
+        let view = chart[person.individualID-1]
+        view.layer.addSublayer(line)
+      }
+//
 //      if person.fatherID > 0 && person.motherID > 0 {
 //        let fatherOriginMid = CGPoint(x: chart[person.fatherID-1].bounds.origin.x / 2.0, y: chart[person.fatherID-1].bounds.origin.y / 2.0)
 //        let motherOriginMid = CGPoint(x: chart[person.motherID-1].bounds.origin.x / 2.0, y: chart[person.motherID-1].bounds.origin.y / 2.0)
