@@ -67,49 +67,60 @@ class ViewController: UIViewController {
       }
     }
     
+    renderPedigree()
+  }
+  
+  /**
+   Renders the pedigree chart
+   */
+  func renderPedigree() {
     for person in pedigree {
-      chart[person.individualID-1].backgroundColor = UIColor.clearColor()
-      let y = chart[person.individualID-1].layer.frame.origin.y
-      let x = chart[person.individualID-1].layer.frame.origin.x
+//      chart[person.individualID-1].backgroundColor = UIColor.clearColor()
+//      let y = chart[person.individualID-1].layer.frame.origin.y
+      let y = chart[person.individualID-1].bounds.origin.y
+//      let x = chart[person.individualID-1].layer.frame.origin.x
+      let x = chart[person.individualID-1].bounds.origin.x
       
-      let midX = chart[person.individualID-1].layer.frame.midX
-      let midY = chart[person.individualID-1].layer.frame.midY
+//      let midX = chart[person.individualID-1].layer.frame.midX
+      let midX = chart[person.individualID-1].bounds.maxX / 2.0
+//      let midY = chart[person.individualID-1].layer.frame.midY
+      let midY = chart[person.individualID-1].bounds.maxY / 2.0
       
-      let radius = chart[person.individualID-1].layer.frame.width / 2.0
-      let length = chart[person.individualID-1].layer.frame.width
+      let length = chart[person.individualID-1].bounds.width
+      let radius = length / 2.0
       
-      let start = CGPoint(x: midX, y: midY)
+//      let start = CGPoint(x: midX, y: midY)
       
       // male
       if person.gender == 1 {
         renderMale(x, y: y, edgeLength: length, person: person)
       } else {
-        renderFemale(x, y: midY, radius: radius, person: person)
+        renderFemale(midX, y: midY, radius: radius, person: person)
       }
       
-      if person.marriedTo > 0 {
-        
-        let endMidX = chart[person.marriedTo-1].layer.frame.midX
-        let endMidY = chart[person.marriedTo-1].layer.frame.midY
-        let end = CGPoint(x: endMidX, y: endMidY)
-        let line = ShapeRenderer.drawLine(start, end: end)
-        canvas.layer.addSublayer(line)
-      }
-      
-      if person.fatherID > 0 && person.motherID > 0 {
-        let fatherOriginMid = CGPoint(x: chart[person.fatherID-1].layer.frame.midX, y: chart[person.fatherID-1].layer.frame.midY)
-        let motherOriginMid = CGPoint(x: chart[person.motherID-1].layer.frame.midX, y: chart[person.motherID-1].layer.frame.midY)
-        
-        let midPointX = (fatherOriginMid.x + motherOriginMid.x) / 2.0
-        let midPointY = (fatherOriginMid.y + motherOriginMid.y) / 2.0
-        
-        let end = CGPoint(x: midPointX, y: midPointY)
-        
-        let line = ShapeRenderer.drawLine(start, end: end)
-        canvas.layer.addSublayer(line)
-      }
+//      if person.marriedTo > 0 {
+//        let endMidX = chart[person.marriedTo-1].layer.frame.midX
+//        let endMidY = chart[person.marriedTo-1].layer.frame.midY
+//        let end = CGPoint(x: endMidX, y: endMidY)
+//        let line = ShapeRenderer.drawLine(start, end: end)
+//        let view = chart[person.individualID-1]
+//        view.layer.addSublayer(line)
+//      }
+//      
+//      if person.fatherID > 0 && person.motherID > 0 {
+//        let fatherOriginMid = CGPoint(x: chart[person.fatherID-1].bounds.origin.x / 2.0, y: chart[person.fatherID-1].bounds.origin.y / 2.0)
+//        let motherOriginMid = CGPoint(x: chart[person.motherID-1].bounds.origin.x / 2.0, y: chart[person.motherID-1].bounds.origin.y / 2.0)
+//        
+//        let midPointX = (fatherOriginMid.x + motherOriginMid.x) / 2.0
+//        let midPointY = (fatherOriginMid.y + motherOriginMid.y) / 2.0
+//        
+//        let end = CGPoint(x: midPointX, y: midPointY)
+//        
+//        let line = ShapeRenderer.drawLine(start, end: end)
+//        let view = chart[person.individualID-1]
+//        view.layer.addSublayer(line)
+//      }
     }
-    
   }
   
   /**
@@ -123,7 +134,8 @@ class ViewController: UIViewController {
   func renderMale(x: CGFloat, y: CGFloat, edgeLength: CGFloat, person: PedigreeData) {
     let rect = CGRectMake(x, y, edgeLength, edgeLength)
     let drawnRectangle = ShapeRenderer.drawRect(rect, person: person)
-    canvas.layer.addSublayer(drawnRectangle)
+    let view = chart[person.individualID-1]
+    view.layer.addSublayer(drawnRectangle)
     rendered.append(person.individualID)
   }
   
@@ -136,9 +148,10 @@ class ViewController: UIViewController {
    - parameter person: The data of the person the circle will represent
    */
   func renderFemale(x: CGFloat, y: CGFloat, radius: CGFloat, person: PedigreeData) {
-    let origin = CGPoint(x: x + 30, y: y)
+    let origin = CGPoint(x: x, y: y)
     let circle = ShapeRenderer.drawCircle(origin, radius: radius, person: person)
-    canvas.layer.addSublayer(circle)
+    let view = chart[person.individualID-1]
+    view.layer.addSublayer(circle)
     rendered.append(person.individualID)
   }
   
@@ -153,6 +166,24 @@ class ViewController: UIViewController {
         sender.scale, sender.scale)
       sender.scale = 1
     }
+  }
+  
+  func strokeSelected(gesture: UITapGestureRecognizer) {
+
+  }
+  
+  /**
+   Handles panning of the view
+   
+   - parameter recognizer: The view being panned by a gesture.
+   */
+  @IBAction func handlePan(recognizer:UIPanGestureRecognizer) {
+    let translation = recognizer.translationInView(self.view)
+    if let view = recognizer.view {
+      view.center = CGPoint(x:view.center.x + translation.x,
+        y:view.center.y + translation.y)
+    }
+    recognizer.setTranslation(CGPointZero, inView: self.view)
   }
 }
 
