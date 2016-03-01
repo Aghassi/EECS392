@@ -92,4 +92,14 @@ class ShapeRenderer: NSObject {
     return shapeLayer
   }
   
+  
+  static func highlightRect(rect: CGRect) -> CAShapeLayer {
+    let path = UIBezierPath(rect: rect)
+    let shapeLayer = CAShapeLayer()
+    shapeLayer.path = path.CGPath
+    shapeLayer.lineWidth = 4.0
+    shapeLayer.strokeColor = UIColor.blackColor().CGColor
+    shapeLayer.fillColor = UIColor.clearColor().CGColor
+    return shapeLayer
+  }
 }

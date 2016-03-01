@@ -28,6 +28,11 @@ class ViewController: UIViewController {
     // Add recognizer for pinch and zoom
     canvas.addGestureRecognizer(UIPinchGestureRecognizer(target: self, action: "scale:"))
     
+    chart = [pedigreeOne, pedigreeTwo, pedigreeThree, pedigreeFour, pedigreeFive, pedigreeSix]
+    for view in chart {
+      view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "highlight:"))
+    }
+    
     /**
      familyID, individualID, fatherID, motherID, gender (1: male, 2:female), affected status(1: affected, 0:not)
      1   1   0  0  1  1
@@ -58,7 +63,6 @@ class ViewController: UIViewController {
     
     
     pedigree = [person, personTwo, personThree, personFour, personFive, personSix]
-    chart = [pedigreeOne, pedigreeTwo, pedigreeThree, pedigreeFour, pedigreeFive, pedigreeSix]
     
     for person in pedigree {
       if person.fatherID > 0 && person.motherID > 0 {
@@ -90,8 +94,8 @@ class ViewController: UIViewController {
       let radius = length / 2.0
 
       
-      let startMidX = chart[person.individualID-1].center.x
-      let startMidY = chart[person.individualID-1].center.y
+      let startMidX = chart[person.individualID-1].bounds.midX
+      let startMidY = chart[person.individualID-1].bounds.midY
       let start = CGPoint(x: startMidX, y: startMidY)
       
       // male
@@ -102,27 +106,37 @@ class ViewController: UIViewController {
       }
       
       if person.marriedTo > 0 && !rendered.contains(person.marriedTo){
-        let endMidX = chart[person.marriedTo-1].center.x
-        let endMidY = chart[person.marriedTo-1].center.y
+        let endMidX = 150.0
+        let endMidY = 40.0
         let end = CGPoint(x: endMidX, y: endMidY)
         let line = ShapeRenderer.drawLine(start, end: end)
         let view = chart[person.individualID-1]
         view.layer.addSublayer(line)
       }
-//
-//      if person.fatherID > 0 && person.motherID > 0 {
-//        let fatherOriginMid = CGPoint(x: chart[person.fatherID-1].bounds.origin.x / 2.0, y: chart[person.fatherID-1].bounds.origin.y / 2.0)
-//        let motherOriginMid = CGPoint(x: chart[person.motherID-1].bounds.origin.x / 2.0, y: chart[person.motherID-1].bounds.origin.y / 2.0)
-//        
-//        let midPointX = (fatherOriginMid.x + motherOriginMid.x) / 2.0
-//        let midPointY = (fatherOriginMid.y + motherOriginMid.y) / 2.0
-//        
-//        let end = CGPoint(x: midPointX, y: midPointY)
-//        
-//        let line = ShapeRenderer.drawLine(start, end: end)
-//        let view = chart[person.individualID-1]
-//        view.layer.addSublayer(line)
-//      }
+
+      if person.fatherID > 0 && person.motherID > 0 {
+        // Hard coded for this assignment, no better way to do it due to time constraints
+        var end: CGPoint
+        var start: CGPoint
+        
+        if person.individualID % 2 == 0 {
+          let midPointX = CGFloat(35.0)
+          let midPointY = CGFloat(50.0)
+          end = CGPoint(x: -1 * midPointX, y: -1 * midPointY)
+          start = CGPoint(x: 50, y: 35)
+        }
+        else {
+          let midPointX = CGFloat(85.0)
+          let midPointY = CGFloat(55.0)
+          end = CGPoint(x: midPointX, y: -1 * midPointY)
+          start = CGPoint(x: 15, y: 35)
+        }
+        
+        
+        let line = ShapeRenderer.drawLine(start, end: end)
+        let view = chart[person.individualID-1]
+        view.layer.addSublayer(line)
+      }
     }
   }
   
@@ -171,8 +185,21 @@ class ViewController: UIViewController {
     }
   }
   
-  func strokeSelected(gesture: UITapGestureRecognizer) {
-
+  func highlight(gesture: UITapGestureRecognizer) {
+    if let view = gesture.view {
+      if view.layer.sublayers?.count > 2 {
+        view.layer.sublayers?.removeLast()
+      }
+      else {
+        let x = view.bounds.origin.x
+        let y = view.bounds.origin.y
+        let length = view.bounds.width
+        let rect = CGRectMake(x, y, length, length)
+        
+        let shapeLayer = ShapeRenderer.highlightRect(rect)
+        view.layer.addSublayer(shapeLayer)
+      }
+    }
   }
   
   /**
