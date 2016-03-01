@@ -80,19 +80,14 @@ class ViewController: UIViewController {
   func renderPedigree() {
     for person in pedigree {
       chart[person.individualID-1].backgroundColor = UIColor.clearColor()
-//      let y = chart[person.individualID-1].layer.frame.origin.y
       let y = chart[person.individualID-1].bounds.origin.y
-//      let x = chart[person.individualID-1].layer.frame.origin.x
       let x = chart[person.individualID-1].bounds.origin.x
       
-//      let midX = chart[person.individualID-1].layer.frame.midX
       let midX = chart[person.individualID-1].bounds.maxX / 2.0
-//      let midY = chart[person.individualID-1].layer.frame.midY
       let midY = chart[person.individualID-1].bounds.maxY / 2.0
       
       let length = chart[person.individualID-1].bounds.width
       let radius = length / 2.0
-
       
       let startMidX = chart[person.individualID-1].bounds.midX
       let startMidY = chart[person.individualID-1].bounds.midY
@@ -110,6 +105,11 @@ class ViewController: UIViewController {
         let endMidY = 40.0
         let end = CGPoint(x: endMidX, y: endMidY)
         let line = ShapeRenderer.drawLine(start, end: end)
+        let view = chart[person.individualID-1]
+        view.layer.addSublayer(line)
+      }
+      else {
+        let line = ShapeRenderer.drawLine(start, end: start)
         let view = chart[person.individualID-1]
         view.layer.addSublayer(line)
       }
@@ -134,6 +134,12 @@ class ViewController: UIViewController {
         
         
         let line = ShapeRenderer.drawLine(start, end: end)
+        let view = chart[person.individualID-1]
+        view.layer.addSublayer(line)
+      }
+      
+      while chart[person.individualID-1].layer.sublayers?.count < 3 {
+        let line = ShapeRenderer.drawLine(start, end: start)
         let view = chart[person.individualID-1]
         view.layer.addSublayer(line)
       }
@@ -185,19 +191,23 @@ class ViewController: UIViewController {
     }
   }
   
+  /**
+   Draws changes the stroke and stroke width of the pedigree box selected
+   
+   - parameter gesture: Tap gesture
+   */
   func highlight(gesture: UITapGestureRecognizer) {
     if let view = gesture.view {
-      if view.layer.sublayers?.count > 2 {
-        view.layer.sublayers?.removeLast()
+      let shapeLayer = view.layer.sublayers?.first as! CAShapeLayer
+      if shapeLayer.lineWidth == 3.0 {
+        // unselect
+        shapeLayer.lineWidth = 2.0
+        shapeLayer.strokeColor = UIColor.redColor().CGColor
       }
       else {
-        let x = view.bounds.origin.x
-        let y = view.bounds.origin.y
-        let length = view.bounds.width
-        let rect = CGRectMake(x, y, length, length)
-        
-        let shapeLayer = ShapeRenderer.highlightRect(rect)
-        view.layer.addSublayer(shapeLayer)
+        //select
+        shapeLayer.lineWidth = 3.0
+        shapeLayer.strokeColor = UIColor.purpleColor().CGColor
       }
     }
   }
