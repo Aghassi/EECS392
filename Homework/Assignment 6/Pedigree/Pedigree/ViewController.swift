@@ -12,6 +12,7 @@ class ViewController: UIViewController {
   var pedigree: [PedigreeData] = []
   var chart: [UIView] = []
   var rendered: [Int] = []
+  var selectedViews: [UIView] = []
   
   @IBOutlet weak var canvas: UIView!
   @IBOutlet weak var pedigreeOne: UIView!
@@ -198,16 +199,24 @@ class ViewController: UIViewController {
    */
   func highlight(gesture: UITapGestureRecognizer) {
     if let view = gesture.view {
-      let shapeLayer = view.layer.sublayers?.first as! CAShapeLayer
-      if shapeLayer.lineWidth == 3.0 {
-        // unselect
-        shapeLayer.lineWidth = 2.0
-        shapeLayer.strokeColor = UIColor.redColor().CGColor
+      if selectedViews.contains(view) && selectedViews.count-1 < 1 {
+        return
       }
       else {
-        //select
-        shapeLayer.lineWidth = 3.0
-        shapeLayer.strokeColor = UIColor.purpleColor().CGColor
+        let shapeLayer = view.layer.sublayers?.first as! CAShapeLayer
+        if shapeLayer.lineWidth == 3.0 {
+          // unselect
+          shapeLayer.lineWidth = 2.0
+          shapeLayer.strokeColor = UIColor.redColor().CGColor
+          selectedViews.removeAtIndex(selectedViews.indexOf(view)!)
+        }
+        else {
+          //select
+          shapeLayer.lineWidth = 3.0
+          shapeLayer.strokeColor = UIColor.purpleColor().CGColor
+          selectedViews.append(view)
+        }
+
       }
     }
   }
