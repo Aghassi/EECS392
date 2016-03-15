@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Pedigree" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="J23-Hf-ua7">
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h5c-bB-XCF">
+                                        <rect key="frame" x="8" y="8" width="80" height="80"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                            <rect key="frame" x="20" y="28" width="80" height="80"/>
+                                        </variation>
+                                    </view>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gjb-wB-Z90">
+                                        <rect key="frame" x="133" y="8" width="80" height="80"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                            <rect key="frame" x="143" y="28" width="80" height="80"/>
+                                        </variation>
+                                    </view>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tw1-Ve-4U9">
+                                        <rect key="frame" x="8" y="96" width="80" height="80"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                            <rect key="frame" x="20" y="150" width="80" height="80"/>
+                                        </variation>
+                                    </view>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="80H-Pb-T5U">
+                                        <rect key="frame" x="133" y="96" width="80" height="80"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                            <rect key="frame" x="143" y="150" width="80" height="80"/>
+                                        </variation>
+                                    </view>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FMk-gb-eZj">
+                                        <rect key="frame" x="8" y="190" width="80" height="80"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                            <rect key="frame" x="20" y="302" width="80" height="80"/>
+                                        </variation>
+                                    </view>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eMz-64-ZVU">
+                                        <rect key="frame" x="133" y="190" width="80" height="80"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                            <rect key="frame" x="143" y="302" width="80" height="80"/>
+                                        </variation>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Ov8-uB-xZU" appends="YES" id="mu3-d8-1od"/>
+                                </connections>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="J23-Hf-ua7" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="8dK-f7-Pc2"/>
+                            <constraint firstItem="J23-Hf-ua7" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="CDG-rp-JAK"/>
+                            <constraint firstAttribute="trailing" secondItem="J23-Hf-ua7" secondAttribute="trailing" id="ceH-9T-5ua"/>
+                            <constraint firstItem="J23-Hf-ua7" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="ewl-XP-pzw"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="canvas" destination="J23-Hf-ua7" id="n2d-qD-S4l"/>
+                        <outlet property="pedigreeFive" destination="FMk-gb-eZj" id="41t-15-YOA"/>
+                        <outlet property="pedigreeFour" destination="80H-Pb-T5U" id="rG0-0q-7q0"/>
+                        <outlet property="pedigreeOne" destination="h5c-bB-XCF" id="Zdc-wo-1pE"/>
+                        <outlet property="pedigreeSix" destination="eMz-64-ZVU" id="kwm-BT-M6q"/>
+                        <outlet property="pedigreeThree" destination="Tw1-Ve-4U9" id="n50-W4-qw8"/>
+                        <outlet property="pedigreeTwo" destination="Gjb-wB-Z90" id="FEJ-x2-jnB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="Ov8-uB-xZU">
+                    <connections>
+                        <action selector="handlePan:" destination="BYZ-38-t0r" id="bPG-Eo-czg"/>
+                    </connections>
+                </panGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="437" y="390"/>
+        </scene>
+    </scenes>
+</document>
