@@ -117,7 +117,7 @@ class BJDGameModel{
   }
   
   func resetGame(){
-    if cards.count < threshhold {
+    if cards.count < threshhold || cards.count == 0 {
       // reset deck
       self.cards.removeAll()
       for _ in 0..<numberOfDecks {

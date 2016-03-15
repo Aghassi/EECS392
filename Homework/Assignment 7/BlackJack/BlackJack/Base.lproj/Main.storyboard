@@ -39,7 +39,7 @@
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <state key="normal" title="Hit"/>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="105" y="689" width="30" height="30"/>
+                                    <rect key="frame" x="264" y="689" width="30" height="30"/>
                                 </variation>
                                 <connections>
                                     <action selector="userClickHit:" destination="BYZ-38-t0r" eventType="touchUpInside" id="s4P-DV-r5d"/>
@@ -49,7 +49,7 @@
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <state key="normal" title="Stand"/>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="208" y="689" width="41" height="30"/>
+                                    <rect key="frame" x="339" y="689" width="41" height="30"/>
                                 </variation>
                                 <connections>
                                     <action selector="userClickStand:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lAh-Dl-Ux6"/>
@@ -159,7 +159,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="105" y="746" width="189" height="21"/>
+                                    <rect key="frame" x="20" y="693" width="189" height="21"/>
                                 </variation>
                             </label>
                         </subviews>
@@ -190,7 +190,7 @@
                     <navigationItem key="navigationItem" title="Blackjack" id="Zzv-96-yHn">
                         <barButtonItem key="rightBarButtonItem" title="Settings" id="QU2-fh-pSk">
                             <connections>
-                                <segue destination="AQt-6A-H4d" kind="show" id="r6q-hy-uGI"/>
+                                <segue destination="AQt-6A-H4d" kind="presentation" identifier="toSettings" id="r6q-hy-uGI"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -203,13 +203,14 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <exit id="lXL-7o-jBd" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="244.5" y="1102.5"/>
+            <point key="canvasLocation" x="244.5" y="1093.5"/>
         </scene>
-        <!--Setting-->
+        <!--Settings View Controller-->
         <scene sceneID="WO0-3Y-g2b">
             <objects>
-                <viewController id="AQt-6A-H4d" sceneMemberID="viewController">
+                <viewController id="AQt-6A-H4d" customClass="SettingsViewController" customModule="BlackJack" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="V3s-UN-PDG"/>
                         <viewControllerLayoutGuide type="bottom" id="lJI-8Q-DN3"/>
@@ -217,31 +218,90 @@
                     <view key="view" contentMode="scaleToFill" id="6sA-7m-4Bb">
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cgt-zw-zRs">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deck Size:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nIa-Pc-Ecf">
+                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="20" width="400" height="44"/>
+                                    <rect key="frame" x="20" y="134" width="162" height="33"/>
                                 </variation>
-                            </navigationBar>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Threshhold:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iPr-Ac-mzp">
+                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="20" y="188" width="162" height="33"/>
+                                </variation>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="1" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YCb-zv-MLC">
+                                <rect key="frame" x="-25" y="-30" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="283" y="134" width="97" height="30"/>
+                                </variation>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="52" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pR4-4Y-glp">
+                                <rect key="frame" x="-25" y="-30" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="283" y="188" width="97" height="30"/>
+                                </variation>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S93-ZG-lf3">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="Cancel"/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="19" y="20" width="48" height="30"/>
+                                </variation>
+                                <connections>
+                                    <segue destination="lXL-7o-jBd" kind="unwind" unwindAction="cancelButtonUnwind:" id="PyM-Mq-FZe"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uVo-Al-esg">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="Done"/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="343" y="20" width="37" height="30"/>
+                                </variation>
+                                <connections>
+                                    <segue destination="e6I-yk-4be" kind="unwind" unwindAction="unwindToGame:" id="ntT-B5-KIs"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <variation key="default">
                             <mask key="subviews">
-                                <exclude reference="Cgt-zw-zRs"/>
+                                <exclude reference="nIa-Pc-Ecf"/>
+                                <exclude reference="iPr-Ac-mzp"/>
+                                <exclude reference="YCb-zv-MLC"/>
+                                <exclude reference="pR4-4Y-glp"/>
+                                <exclude reference="S93-ZG-lf3"/>
+                                <exclude reference="uVo-Al-esg"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="subviews">
-                                <include reference="Cgt-zw-zRs"/>
+                                <include reference="nIa-Pc-Ecf"/>
+                                <include reference="iPr-Ac-mzp"/>
+                                <include reference="YCb-zv-MLC"/>
+                                <include reference="pR4-4Y-glp"/>
+                                <include reference="S93-ZG-lf3"/>
+                                <include reference="uVo-Al-esg"/>
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="Setting" id="L0G-wU-d7Y">
-                        <barButtonItem key="leftBarButtonItem" title="Item" systemItem="cancel" id="Wp3-q5-QCC"/>
-                        <barButtonItem key="rightBarButtonItem" title="Done" id="kcd-EY-nfk"/>
-                    </navigationItem>
+                    <connections>
+                        <outlet property="deckSizeTextField" destination="YCb-zv-MLC" id="Jrg-Um-uBt"/>
+                        <outlet property="threshholdTextField" destination="pR4-4Y-glp" id="Xo9-tU-5u8"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2yM-eP-fnL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="e6I-yk-4be" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="244.5" y="1918.5"/>
         </scene>

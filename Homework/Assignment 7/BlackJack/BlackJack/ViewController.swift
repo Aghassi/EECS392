@@ -45,12 +45,9 @@ class ViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
+    restartGame()
   }
 
-  
-  override func viewDidAppear(animated: Bool) {
-    displayThreshholdSetDialog()
-  }
   
   @IBAction func userClickHit(sender: UIButton) {
     if gameModel.isThreshhold() {
@@ -131,36 +128,36 @@ class ViewController: UIViewController {
     gameModel.updateGameStage()
   }
   
-  private func displayThreshholdSetDialog() {
-    let threshholdAlert = UIAlertController(title: "Please enter a threshhold", message: "Select a number of decks and a threshhold of when the game should end", preferredStyle: .Alert)
-    threshholdAlert.addAction(UIAlertAction(title: "Done", style: UIAlertActionStyle.Default, handler: { alertAction in
-      if let fields = threshholdAlert.textFields {
-        self.gameModel.numberOfDecks = Int(fields[0].text!)!
-        self.gameModel.threshhold = Int(fields[1].text!)!
-      }
-      self.restartGame()
-    }))
-    
-    threshholdAlert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: {alertAction in
-
-    }))
-    threshholdAlert.actions[0].enabled = false
-    threshholdAlert.addTextFieldWithConfigurationHandler({
-      textField in
-      textField.placeholder = "Deck number..."
-      textField.keyboardType = .NumberPad
+  
+  @IBAction func unwindToGame(unwindSegue: UIStoryboardSegue) {
+    if let mainView = unwindSegue.sourceViewController as? SettingsViewController {
       
-      // taken from https://github.com/mattneub/Programming-iOS-Book-Examples/blob/master/bk2ch13p620dialogsOniPhone/ch26p888dialogsOniPhone/ViewController.swift#L40
-      textField.addTarget(self, action: "textChanged:", forControlEvents: .EditingChanged)
-    })
-    threshholdAlert.addTextFieldWithConfigurationHandler({
-      textField in
-      textField.placeholder = "Threshhold number..."
-      textField.keyboardType = .NumberPad
-    })
-
-    self.presentViewController(threshholdAlert, animated: true, completion: nil)
+      if let deckSize = mainView.deckSizeTextField.text {
+        if (!deckSize.isEmpty) {
+          self.gameModel.numberOfDecks = Int(deckSize)!
+        }
+        else {
+          self.gameModel.numberOfDecks = 1
+        }
+      }
+      
+      if let threshholdSize = mainView.threshholdTextField.text {
+        if (!threshholdSize.isEmpty) {
+          self.gameModel.threshhold = Int(threshholdSize)!
+        }
+        else {
+          self.gameModel.threshhold = 52
+        }
+      }
+      
+      restartGame()
+    }
   }
+  
+  @IBAction func cancelButtonUnwind(unwindSegue: UIStoryboardSegue) {
+  }
+
+
   
   func textChanged(sender:AnyObject) {
     let tf = sender as! UITextField

@@ -16,6 +16,7 @@
 		9F01ADAF1C5FAF6100711E9C /* BlackJackUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F01ADAE1C5FAF6100711E9C /* BlackJackUITests.swift */; };
 		9F01ADBD1C62494F00711E9C /* images in Resources */ = {isa = PBXBuildFile; fileRef = 9F01ADBC1C62494F00711E9C /* images */; };
 		9F01ADBF1C624C9000711E9C /* card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F01ADBE1C624C9000711E9C /* card.swift */; };
+		D438E5CD1C98878B00C388AB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D438E5CC1C98878B00C388AB /* SettingsViewController.swift */; };
 		D49F48E41C6D90A200279E9A /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49F48E31C6D90A200279E9A /* CollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +53,7 @@
 		9F01ADB01C5FAF6100711E9C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9F01ADBC1C62494F00711E9C /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
 		9F01ADBE1C624C9000711E9C /* card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = card.swift; sourceTree = "<group>"; };
+		D438E5CC1C98878B00C388AB /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		D49F48E31C6D90A200279E9A /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -103,11 +105,11 @@
 		9F01AD8D1C5FAF6000711E9C /* BlackJack */ = {
 			isa = PBXGroup;
 			children = (
+				D438E5CA1C98875900C388AB /* Model */,
+				D438E5C91C9884D000C388AB /* Game Logic */,
+				D438E5CB1C98876800C388AB /* Controllers */,
 				9F01AD8E1C5FAF6000711E9C /* AppDelegate.swift */,
-				9F01AD901C5FAF6000711E9C /* ViewController.swift */,
 				9F01AD921C5FAF6000711E9C /* Main.storyboard */,
-				D49F48E31C6D90A200279E9A /* CollectionViewCell.swift */,
-				9F01ADBE1C624C9000711E9C /* card.swift */,
 				9F01AD951C5FAF6000711E9C /* Assets.xcassets */,
 				9F01ADBC1C62494F00711E9C /* images */,
 				9F01AD971C5FAF6000711E9C /* LaunchScreen.storyboard */,
@@ -132,6 +134,31 @@
 				9F01ADB01C5FAF6100711E9C /* Info.plist */,
 			);
 			path = BlackJackUITests;
+			sourceTree = "<group>";
+		};
+		D438E5C91C9884D000C388AB /* Game Logic */ = {
+			isa = PBXGroup;
+			children = (
+				9F01ADBE1C624C9000711E9C /* card.swift */,
+			);
+			name = "Game Logic";
+			sourceTree = "<group>";
+		};
+		D438E5CA1C98875900C388AB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D49F48E31C6D90A200279E9A /* CollectionViewCell.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		D438E5CB1C98876800C388AB /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				9F01AD901C5FAF6000711E9C /* ViewController.swift */,
+				D438E5CC1C98878B00C388AB /* SettingsViewController.swift */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -269,6 +296,7 @@
 				D49F48E41C6D90A200279E9A /* CollectionViewCell.swift in Sources */,
 				9F01ADBF1C624C9000711E9C /* card.swift in Sources */,
 				9F01AD911C5FAF6000711E9C /* ViewController.swift in Sources */,
+				D438E5CD1C98878B00C388AB /* SettingsViewController.swift in Sources */,
 				9F01AD8F1C5FAF6000711E9C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
