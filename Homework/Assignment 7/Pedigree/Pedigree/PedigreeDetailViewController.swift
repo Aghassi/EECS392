@@ -12,9 +12,22 @@ class PedigreeDetailViewController: UIViewController {
   
   var tappedCellData: PedigreeData = PedigreeData(individual: 0, father: 0, mother: 0, gender: 0)
   
+  @IBOutlet weak var pedigreeNameLabel: UILabel!
+  @IBOutlet weak var affectedOutlet: UITextField!
+  @IBOutlet weak var fatherLabel: UILabel!
+  @IBOutlet weak var motherLabel: UILabel!
+  @IBOutlet weak var genderLabel: UILabel!
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    pedigreeNameLabel.text = "Person: \(tappedCellData.individualID)"
+    fatherLabel.text = "\(tappedCellData.fatherID)"
+    motherLabel.text = "\(tappedCellData.motherID)"
+    genderLabel.text = "\(tappedCellData.gender)"
+    affectedOutlet.text = "\(tappedCellData.affected)"
+
+
     
     // Do any additional setup after loading the view.
   }

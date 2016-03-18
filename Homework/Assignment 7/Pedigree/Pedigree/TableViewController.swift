@@ -55,9 +55,13 @@ class TableViewController: UITableViewController {
     return cell
   }
   
-  override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+  override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
     tappedCellData = data[indexPath.row] as! PedigreeData
-    performSegueWithIdentifier("pedigreeDetail", sender: self)
+    return indexPath
+  }
+  
+  override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    tableView.deselectRowAtIndexPath(indexPath, animated: true)
   }
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -71,6 +75,10 @@ class TableViewController: UITableViewController {
   override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
     // Return false if you do not want the specified item to be editable.
     return false
+  }
+  
+  @IBAction func doneButtonPressed(sender: UIStoryboardSegue) {
+    
   }
   
   /*
