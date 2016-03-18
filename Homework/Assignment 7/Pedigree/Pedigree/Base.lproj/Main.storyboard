@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="wO7-XO-cYV">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
@@ -65,6 +65,9 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="20" width="400" height="780"/>
+                                </variation>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="Ov8-uB-xZU" appends="YES" id="mu3-d8-1od"/>
                                 </connections>
@@ -78,6 +81,7 @@
                             <constraint firstItem="J23-Hf-ua7" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="ewl-XP-pzw"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" systemItem="contacts" id="dXP-Ih-RbG"/>
                     <connections>
                         <outlet property="canvas" destination="J23-Hf-ua7" id="n2d-qD-S4l"/>
                         <outlet property="pedigreeFive" destination="FMk-gb-eZj" id="41t-15-YOA"/>
@@ -95,7 +99,71 @@
                     </connections>
                 </panGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="437" y="390"/>
+            <point key="canvasLocation" x="1354.5" y="390"/>
+        </scene>
+        <!--Table View Controller-->
+        <scene sceneID="Q5E-ic-kKN">
+            <objects>
+                <tableViewController id="VSM-PK-UEo" customClass="TableViewController" customModule="Pedigree" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="i4g-aw-pRc">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PedigreeCell" id="c56-X5-APQ">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="c56-X5-APQ" id="IP7-gQ-5lK">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="VSM-PK-UEo" id="cwD-Sv-jXf"/>
+                            <outlet property="delegate" destination="VSM-PK-UEo" id="zw8-Ha-1Id"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" systemItem="more" id="i6o-W7-8Ma"/>
+                    <connections>
+                        <segue destination="Nuv-HJ-9Sa" kind="show" identifier="pedigreeDetail" id="ibl-wO-t70"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="frE-H8-Hsh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1354.5" y="1080.75"/>
+        </scene>
+        <!--Pedigree Detail View Controller-->
+        <scene sceneID="zff-d0-sQn">
+            <objects>
+                <viewController id="Nuv-HJ-9Sa" customClass="PedigreeDetailViewController" customModule="Pedigree" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="g2L-IY-LeM"/>
+                        <viewControllerLayoutGuide type="bottom" id="UgX-lG-Ivl"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3r1-g4-qhO">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cLq-Iz-lii" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2230.5" y="1080.75"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="EDB-Rz-zHf">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="wO7-XO-cYV" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="V5J-jQ-NS4">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="p9C-iS-oux"/>
+                        <segue destination="VSM-PK-UEo" kind="relationship" relationship="viewControllers" id="Fdi-PO-Di1"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZB8-Sa-BMP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="436.5" y="390"/>
         </scene>
     </scenes>
 </document>

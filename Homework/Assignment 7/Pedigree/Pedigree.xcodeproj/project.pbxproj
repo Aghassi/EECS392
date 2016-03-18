@@ -14,6 +14,8 @@
 		D49615FA1C7CEDB2005E44CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D49615F91C7CEDB2005E44CA /* Assets.xcassets */; };
 		D49615FD1C7CEDB2005E44CA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D49615FB1C7CEDB2005E44CA /* LaunchScreen.storyboard */; };
 		D49616051C7CEDE9005E44CA /* PedigreeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49616041C7CEDE9005E44CA /* PedigreeData.swift */; };
+		D4AC3CD71C9B7EB60021C16B /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AC3CD61C9B7EB60021C16B /* TableViewController.swift */; };
+		D4AC3CD91C9B818F0021C16B /* PedigreeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AC3CD81C9B818F0021C16B /* PedigreeDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		D49615FC1C7CEDB2005E44CA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D49615FE1C7CEDB2005E44CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D49616041C7CEDE9005E44CA /* PedigreeData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PedigreeData.swift; path = Model/PedigreeData.swift; sourceTree = "<group>"; };
+		D4AC3CD61C9B7EB60021C16B /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		D4AC3CD81C9B818F0021C16B /* PedigreeDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PedigreeDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +64,8 @@
 			children = (
 				D49615F21C7CEDB2005E44CA /* AppDelegate.swift */,
 				D49615F41C7CEDB2005E44CA /* ViewController.swift */,
+				D4AC3CD61C9B7EB60021C16B /* TableViewController.swift */,
+				D4AC3CD81C9B818F0021C16B /* PedigreeDetailViewController.swift */,
 				D44E330D1C838E8D0036D478 /* ShapeRenderer.swift */,
 				D49615F61C7CEDB2005E44CA /* Main.storyboard */,
 				D49615F91C7CEDB2005E44CA /* Assets.xcassets */,
@@ -144,6 +150,8 @@
 				D49616051C7CEDE9005E44CA /* PedigreeData.swift in Sources */,
 				D49615F51C7CEDB2005E44CA /* ViewController.swift in Sources */,
 				D44E330E1C838E8D0036D478 /* ShapeRenderer.swift in Sources */,
+				D4AC3CD71C9B7EB60021C16B /* TableViewController.swift in Sources */,
+				D4AC3CD91C9B818F0021C16B /* PedigreeDetailViewController.swift in Sources */,
 				D49615F31C7CEDB2005E44CA /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
