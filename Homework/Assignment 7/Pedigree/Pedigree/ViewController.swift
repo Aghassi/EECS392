@@ -25,22 +25,32 @@ class ViewController: UIViewController {
   @IBOutlet weak var pedigreeFive: UIView!
   @IBOutlet weak var pedigreeSix: UIView!
   
+  override func viewWillAppear(animated: Bool) {
+    if rendered.count >= pedigree.count {
+      for pedigreeView in chart {
+        pedigreeView.layer.sublayers?.removeAll()
+      }
+      
+      rendered.removeAll()
+    }
+    
+    pedigree = appDelegate.pedigree
+    renderPedigree()
+  }
+  
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
     // Add recognizer for pinch and zoom
-    canvas.addGestureRecognizer(UIPinchGestureRecognizer(target: self, action: "scale:"))
+    canvas.addGestureRecognizer(UIPinchGestureRecognizer(target: self, action: #selector(ViewController.scale(_:))))
     
     chart = [pedigreeOne, pedigreeTwo, pedigreeThree, pedigreeFour, pedigreeFive, pedigreeSix]
     for view in chart {
-      view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "highlight:"))
+      view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(ViewController.highlight(_:))))
     }
     
     pedigree = appDelegate.pedigree
-  
-    
-    renderPedigree()
   }
   
   /**

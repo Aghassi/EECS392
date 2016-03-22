@@ -78,6 +78,11 @@ class TableViewController: UITableViewController {
   }
   
   @IBAction func doneButtonPressed(sender: UIStoryboardSegue) {
+    if sender.sourceViewController is PedigreeDetailViewController {
+      let sourceViewController = sender.sourceViewController as! PedigreeDetailViewController
+      tappedCellData = sourceViewController.tappedCellData
+      appDelegate.pedigree[tappedCellData.individualID-1] = tappedCellData
+    }
     
   }
   
