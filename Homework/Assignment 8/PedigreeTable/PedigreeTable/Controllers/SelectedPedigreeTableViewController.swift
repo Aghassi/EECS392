@@ -1,5 +1,5 @@
 //
-//  PedigreeTableViewController.swift
+//  SelectedPedigreeTableViewController.swift
 //  PedigreeTable
 //
 //  Created by David Aghassi on 3/26/16.
@@ -8,11 +8,11 @@
 
 import UIKit
 
-class PedigreeTableViewController: UITableViewController {
-  private var pedigrees = [Pedigree]()
+class SelectedPedigreeTableViewController: UITableViewController {
+  private var family = [Individual]()
   
   enum Storyboard: String {
-    case reuseIdentifier = "PedigreeCell"
+    case reuseIdentifier = "IndividualCell"
   }
   
   override func viewDidLoad() {
@@ -39,16 +39,20 @@ class PedigreeTableViewController: UITableViewController {
   
   override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     // #warning Incomplete implementation, return the number of rows
-    return pedigrees.count
+    return family.count
   }
   
   
   override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.reuseIdentifier.rawValue, forIndexPath: indexPath)
     
-    let proband = pedigrees[indexPath.row].proband
+    let individual = family[indexPath.row]
     
-    cell.textLabel?.text = "Proband: \(proband.name.first) \(proband.name.last)"
+    cell.textLabel?.text = "\(individual.name.first) \(individual.name.last)"
+    
+    let fatherName = "\(individual.father.name.first) \(individual.father.name.last)"
+    let motherName = "\(individual.mother.name.first) \(individual.mother.name.last)"
+    cell.detailTextLabel?.text = "Father: \(fatherName) Mother: \(motherName)"
     
     return cell
   }

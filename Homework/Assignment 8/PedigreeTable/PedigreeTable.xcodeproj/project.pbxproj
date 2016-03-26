@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D417B4FB1CA71676006EF783 /* SelectedPedigreeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D417B4FA1CA71676006EF783 /* SelectedPedigreeTableViewController.swift */; };
 		D419873C1CA4BB490072950E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D419873B1CA4BB490072950E /* AppDelegate.swift */; };
 		D41987411CA4BB490072950E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D419873F1CA4BB490072950E /* Main.storyboard */; };
 		D41987431CA4BB490072950E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D41987421CA4BB490072950E /* Assets.xcassets */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D417B4FA1CA71676006EF783 /* SelectedPedigreeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectedPedigreeTableViewController.swift; path = Controllers/SelectedPedigreeTableViewController.swift; sourceTree = "<group>"; };
 		D41987381CA4BB490072950E /* PedigreeTable.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PedigreeTable.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D419873B1CA4BB490072950E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D41987401CA4BB490072950E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				D4B327FC1CA64FC800B0C04A /* PedigreeTableViewController.swift */,
+				D417B4FA1CA71676006EF783 /* SelectedPedigreeTableViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -163,6 +166,7 @@
 			files = (
 				D4B327FD1CA64FC800B0C04A /* PedigreeTableViewController.swift in Sources */,
 				D419874F1CA4BD250072950E /* Individual.swift in Sources */,
+				D417B4FB1CA71676006EF783 /* SelectedPedigreeTableViewController.swift in Sources */,
 				D428E1CD1CA645E600B98AFC /* Pedigree.swift in Sources */,
 				D419873C1CA4BB490072950E /* AppDelegate.swift in Sources */,
 			);
