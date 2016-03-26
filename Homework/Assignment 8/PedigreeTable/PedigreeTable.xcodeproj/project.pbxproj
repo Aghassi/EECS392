@@ -8,22 +8,26 @@
 
 /* Begin PBXBuildFile section */
 		D419873C1CA4BB490072950E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D419873B1CA4BB490072950E /* AppDelegate.swift */; };
-		D419873E1CA4BB490072950E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D419873D1CA4BB490072950E /* ViewController.swift */; };
 		D41987411CA4BB490072950E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D419873F1CA4BB490072950E /* Main.storyboard */; };
 		D41987431CA4BB490072950E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D41987421CA4BB490072950E /* Assets.xcassets */; };
 		D41987461CA4BB490072950E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D41987441CA4BB490072950E /* LaunchScreen.storyboard */; };
 		D419874F1CA4BD250072950E /* Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = D419874E1CA4BD250072950E /* Individual.swift */; };
+		D428E1CD1CA645E600B98AFC /* Pedigree.swift in Sources */ = {isa = PBXBuildFile; fileRef = D428E1CC1CA645E600B98AFC /* Pedigree.swift */; };
+		D4B327FD1CA64FC800B0C04A /* PedigreeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B327FC1CA64FC800B0C04A /* PedigreeTableViewController.swift */; };
+		D4B327FF1CA651DC00B0C04A /* model-data.json in Resources */ = {isa = PBXBuildFile; fileRef = D4B327FE1CA651DB00B0C04A /* model-data.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		D41987381CA4BB490072950E /* PedigreeTable.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PedigreeTable.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D419873B1CA4BB490072950E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D419873D1CA4BB490072950E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		D41987401CA4BB490072950E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D41987421CA4BB490072950E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D41987451CA4BB490072950E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D41987471CA4BB490072950E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D419874E1CA4BD250072950E /* Individual.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Individual.swift; path = Model/Individual.swift; sourceTree = "<group>"; };
+		D428E1CC1CA645E600B98AFC /* Pedigree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Pedigree.swift; path = Model/Pedigree.swift; sourceTree = "<group>"; };
+		D4B327FC1CA64FC800B0C04A /* PedigreeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PedigreeTableViewController.swift; path = Controllers/PedigreeTableViewController.swift; sourceTree = "<group>"; };
+		D4B327FE1CA651DB00B0C04A /* model-data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "model-data.json"; path = "PedigreeTable/model-data.json"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +44,7 @@
 		D419872F1CA4BB490072950E = {
 			isa = PBXGroup;
 			children = (
+				D4B327FE1CA651DB00B0C04A /* model-data.json */,
 				D419873A1CA4BB490072950E /* PedigreeTable */,
 				D41987391CA4BB490072950E /* Products */,
 			);
@@ -57,8 +62,8 @@
 			isa = PBXGroup;
 			children = (
 				D419874D1CA4BC8F0072950E /* Model */,
+				D4B327FB1CA64FA000B0C04A /* Controllers */,
 				D419873B1CA4BB490072950E /* AppDelegate.swift */,
-				D419873D1CA4BB490072950E /* ViewController.swift */,
 				D419873F1CA4BB490072950E /* Main.storyboard */,
 				D41987421CA4BB490072950E /* Assets.xcassets */,
 				D41987441CA4BB490072950E /* LaunchScreen.storyboard */,
@@ -71,8 +76,17 @@
 			isa = PBXGroup;
 			children = (
 				D419874E1CA4BD250072950E /* Individual.swift */,
+				D428E1CC1CA645E600B98AFC /* Pedigree.swift */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		D4B327FB1CA64FA000B0C04A /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D4B327FC1CA64FC800B0C04A /* PedigreeTableViewController.swift */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -136,6 +150,7 @@
 				D41987461CA4BB490072950E /* LaunchScreen.storyboard in Resources */,
 				D41987431CA4BB490072950E /* Assets.xcassets in Resources */,
 				D41987411CA4BB490072950E /* Main.storyboard in Resources */,
+				D4B327FF1CA651DC00B0C04A /* model-data.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,8 +161,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4B327FD1CA64FC800B0C04A /* PedigreeTableViewController.swift in Sources */,
 				D419874F1CA4BD250072950E /* Individual.swift in Sources */,
-				D419873E1CA4BB490072950E /* ViewController.swift in Sources */,
+				D428E1CD1CA645E600B98AFC /* Pedigree.swift in Sources */,
 				D419873C1CA4BB490072950E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -298,6 +314,7 @@
 				D419874C1CA4BB490072950E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
