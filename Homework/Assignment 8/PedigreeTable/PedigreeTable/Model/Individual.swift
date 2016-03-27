@@ -8,22 +8,19 @@
 
 import UIKit
 
+enum Gender {
+  case MALE
+  case FEMALE
+}
+
 class Individual: NSObject {
-  enum Gender {
-    case MALE
-    case FEMALE
-  }
   
   //least have these attributes: ID, First Name, Last Name, Gender, pointers to father and mother, disease status
   var ID: Int = 0
   var name = (first: "", last: "")
   var gender = Gender.FEMALE
-  var mother = Individual()
-  var father = Individual()
-  
-  override init() {
-    super.init()
-  }
+  var mother: Individual?
+  var father: Individual?
   
   /**
    Sets the individual. Requires `ID`, `name`, `gender`. `father` and `mother` can be applied after if any
@@ -38,5 +35,7 @@ class Individual: NSObject {
     ID = id
     self.name = name
     self.gender = gender
+    self.father = nil
+    self.mother = nil
   }
 }

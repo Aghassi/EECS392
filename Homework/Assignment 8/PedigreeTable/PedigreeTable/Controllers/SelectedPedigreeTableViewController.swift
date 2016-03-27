@@ -9,7 +9,10 @@
 import UIKit
 
 class SelectedPedigreeTableViewController: UITableViewController {
-  private var family = [Individual]()
+  var selectedPedigree: Pedigree?
+  var family: [Individual]? {
+    return selectedPedigree?.family
+  }
   
   enum Storyboard: String {
     case reuseIdentifier = "IndividualCell"
@@ -39,20 +42,33 @@ class SelectedPedigreeTableViewController: UITableViewController {
   
   override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     // #warning Incomplete implementation, return the number of rows
-    return family.count
+    if (family != nil) {
+      return (family?.count)!
+    }
+    else {
+      return 0
+    }
   }
   
   
   override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.reuseIdentifier.rawValue, forIndexPath: indexPath)
     
-    let individual = family[indexPath.row]
-    
-    cell.textLabel?.text = "\(individual.name.first) \(individual.name.last)"
-    
-    let fatherName = "\(individual.father.name.first) \(individual.father.name.last)"
-    let motherName = "\(individual.mother.name.first) \(individual.mother.name.last)"
-    cell.detailTextLabel?.text = "Father: \(fatherName) Mother: \(motherName)"
+    if family != nil {
+      let individual = family![indexPath.row]
+      
+      cell.textLabel?.text = "\(individual.name.first) \(individual.name.last)"
+      
+      if (individual.father != nil) {
+        let fatherName = "\(individual.father!.name.first) \(individual.father!.name.last)"
+        let motherName = "\(individual.mother!.name.first) \(individual.mother!.name.last)"
+        cell.detailTextLabel?.text = "Father: \(fatherName) Mother: \(motherName)"
+        
+      }
+      else {
+        cell.detailTextLabel?.text = ""
+      }
+    }
     
     return cell
   }

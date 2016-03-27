@@ -12,9 +12,84 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
   var window: UIWindow?
+  
+  // Need to hard code this for the project, normally wouldn't do this:
+  var pedigrees = [Pedigree]()
 
 
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    
+    // Family 1 - Father, Mother, and three children
+    let familyOneFather = Individual(id: 0, name: ("Robert", "Plant"), gender: Gender.MALE)
+    let familyOneMother = Individual(id: 1, name: ("Linda", "Plant"), gender: Gender.FEMALE)
+    
+    let familyOneLisa = Individual(id: 2, name: ("Lisa", "Plant"), gender: Gender.FEMALE)
+    familyOneLisa.father = familyOneFather
+    familyOneLisa.mother = familyOneMother
+    
+    let familyOneJohn = Individual(id: 3, name: ("John", "Plant"), gender: Gender.MALE)
+    familyOneJohn.father = familyOneFather
+    familyOneJohn.mother = familyOneMother
+    
+    let familyOneDonna = Individual(id: 4, name: ("Donna", "Plant"), gender: Gender.FEMALE)
+    familyOneDonna.father = familyOneFather
+    familyOneDonna.mother = familyOneMother
+    
+    let familyOne = [familyOneFather, familyOneMother, familyOneLisa, familyOneJohn, familyOneDonna]
+    let pedigreeOne = Pedigree(family: familyOne, proband: familyOneFather)
+    pedigrees.append(pedigreeOne)
+    
+    // Family 2 - Four grandparents, two parents, two kids
+    let familyTwofatherMother = Individual(id: 5, name: ("Lauren", "Smith"), gender: Gender.FEMALE)
+    let familyTwofatherFather = Individual(id: 6, name: ("Ron", "Smith"), gender: Gender.FEMALE)
+    
+    let familyTwoFather = Individual(id: 7, name: ("Dale", "Smith"), gender: Gender.MALE)
+    familyTwoFather.father = familyTwofatherFather
+    familyTwoFather.mother = familyTwofatherMother
+    
+    let familyTwoMothersMother = Individual(id: 8, name: ("Sally", "Goodall"), gender: Gender.FEMALE)
+    let familyTwoMothersFather = Individual(id: 9, name: ("George", "Goodall"), gender: Gender.MALE)
+    
+    let familyTwoMother = Individual(id: 10, name: ("Danielle", "Smith"), gender: Gender.FEMALE)
+    familyTwoMother.father = familyTwoMothersFather
+    familyTwoMother.mother = familyTwoMothersMother
+    
+    let familyTwoSon = Individual(id: 11, name: ("Jonny", "Smith"), gender: Gender.MALE)
+    familyTwoSon.mother = familyTwoMother
+    familyTwoSon.father = familyTwoFather
+    
+    let familyTwoDaughter = Individual(id: 12, name: ("Ronda", "Smith"), gender: Gender.FEMALE)
+    familyTwoDaughter.mother = familyTwoMother
+    familyTwoDaughter.father = familyTwoFather
+    
+    let familyTwo = [familyTwofatherFather, familyTwofatherMother, familyTwoMothersFather, familyTwoMothersMother, familyTwoFather, familyTwoMother, familyTwoSon, familyTwoDaughter]
+    let pedigreeTwo = Pedigree(family: familyTwo, proband: familyTwofatherMother)
+    pedigrees.append(pedigreeTwo)
+    
+    // Family 3 - Two shared grandparents, two parents, two children
+    let familyThreeGrandfather = Individual(id: 13, name: ("Steven", "Pad"), gender: Gender.MALE)
+    let familyThreeGrandmother = Individual(id: 14, name: ("Irene", "Pad"), gender: Gender.FEMALE)
+    
+    let familyThreeFather = Individual(id: 15, name: ("Randall", "Pad"), gender: Gender.MALE)
+    familyThreeFather.father = familyThreeGrandfather
+    familyThreeFather.mother = familyThreeGrandmother
+    
+    let familyThreeMother = Individual(id: 16, name: ("Ruth", "Pad"), gender: Gender.FEMALE)
+    familyThreeMother.father = familyThreeGrandfather
+    familyThreeMother.mother = familyThreeGrandmother
+    
+    let familyThreeSon = Individual(id: 17, name: ("Michael", "Pad"), gender: Gender.MALE)
+    familyThreeSon.father = familyThreeFather
+    familyThreeSon.mother = familyThreeMother
+    
+    let familyThreeDaughter = Individual(id: 18, name: ("Michelle", "Pad"), gender: Gender.FEMALE)
+    familyThreeDaughter.father = familyThreeFather
+    familyThreeDaughter.mother = familyThreeMother
+    
+    let familyThree = [familyThreeGrandfather, familyThreeGrandmother, familyThreeFather, familyThreeMother, familyThreeSon, familyThreeDaughter]
+    let pedigreeThree = Pedigree(family: familyThree, proband: familyThreeGrandfather)
+    pedigrees.append(pedigreeThree)
+    
     // Override point for customization after application launch.
     return true
   }

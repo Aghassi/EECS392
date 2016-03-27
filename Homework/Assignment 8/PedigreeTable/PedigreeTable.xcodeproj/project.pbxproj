@@ -15,7 +15,6 @@
 		D419874F1CA4BD250072950E /* Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = D419874E1CA4BD250072950E /* Individual.swift */; };
 		D428E1CD1CA645E600B98AFC /* Pedigree.swift in Sources */ = {isa = PBXBuildFile; fileRef = D428E1CC1CA645E600B98AFC /* Pedigree.swift */; };
 		D4B327FD1CA64FC800B0C04A /* PedigreeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B327FC1CA64FC800B0C04A /* PedigreeTableViewController.swift */; };
-		D4B327FF1CA651DC00B0C04A /* model-data.json in Resources */ = {isa = PBXBuildFile; fileRef = D4B327FE1CA651DB00B0C04A /* model-data.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,7 +28,6 @@
 		D419874E1CA4BD250072950E /* Individual.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Individual.swift; path = Model/Individual.swift; sourceTree = "<group>"; };
 		D428E1CC1CA645E600B98AFC /* Pedigree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Pedigree.swift; path = Model/Pedigree.swift; sourceTree = "<group>"; };
 		D4B327FC1CA64FC800B0C04A /* PedigreeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PedigreeTableViewController.swift; path = Controllers/PedigreeTableViewController.swift; sourceTree = "<group>"; };
-		D4B327FE1CA651DB00B0C04A /* model-data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "model-data.json"; path = "PedigreeTable/model-data.json"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,7 +44,6 @@
 		D419872F1CA4BB490072950E = {
 			isa = PBXGroup;
 			children = (
-				D4B327FE1CA651DB00B0C04A /* model-data.json */,
 				D419873A1CA4BB490072950E /* PedigreeTable */,
 				D41987391CA4BB490072950E /* Products */,
 			);
@@ -153,7 +150,6 @@
 				D41987461CA4BB490072950E /* LaunchScreen.storyboard in Resources */,
 				D41987431CA4BB490072950E /* Assets.xcassets in Resources */,
 				D41987411CA4BB490072950E /* Main.storyboard in Resources */,
-				D4B327FF1CA651DC00B0C04A /* model-data.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

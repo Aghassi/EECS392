@@ -10,7 +10,7 @@ import UIKit
 
 class Pedigree: NSObject {
   var family = [Individual]()
-  var proband = Individual()
+  var proband: Individual?
 
   /**
    Creates a new Pedigree object. Contains an array of `Individuals` and a `Proband`

@@ -9,14 +9,20 @@
 import UIKit
 
 class PedigreeTableViewController: UITableViewController {
+  private let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
   private var pedigrees = [Pedigree]()
+  private var selectedPedigree: Pedigree?
   
   enum Storyboard: String {
+    case segueIdentifier = "selectedPedigree"
     case reuseIdentifier = "PedigreeCell"
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    // Get pedigrees
+    pedigrees = appDelegate.pedigrees
     
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = false
@@ -48,11 +54,15 @@ class PedigreeTableViewController: UITableViewController {
     
     let proband = pedigrees[indexPath.row].proband
     
-    cell.textLabel?.text = "Proband: \(proband.name.first) \(proband.name.last)"
+    cell.textLabel?.text = "Proband: \(proband!.name.first) \(proband!.name.last)"
     
     return cell
   }
   
+  override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+    selectedPedigree = pedigrees[indexPath.row]
+    return indexPath
+  }
   
   /*
    // Override to support conditional editing of the table view.
@@ -89,14 +99,17 @@ class PedigreeTableViewController: UITableViewController {
    }
    */
   
-  /*
-   // MARK: - Navigation
-   
-   // In a storyboard-based application, you will often want to do a little preparation before navigation
-   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-   // Get the new view controller using segue.destinationViewController.
-   // Pass the selected object to the new view controller.
-   }
-   */
+  // MARK: - Navigation
+  
+  // In a storyboard-based application, you will often want to do a little preparation before navigation
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    if segue.identifier == Storyboard.segueIdentifier.rawValue {
+      let destinationController = segue.destinationViewController as! SelectedPedigreeTableViewController
+      destinationController.selectedPedigree = selectedPedigree
+    }
+    
+    // Get the new view controller using segue.destinationViewController.
+    // Pass the selected object to the new view controller.
+  }
   
 }
