@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--Pedigree Table View Controller-->
+        <!--Pedigrees-->
         <scene sceneID="GFo-Wr-4AF">
             <objects>
                 <tableViewController id="jPz-Fh-iDf" customClass="PedigreeTableViewController" customModule="PedigreeTable" customModuleProvider="target" sceneMemberID="viewController">
@@ -31,7 +31,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="l22-hp-SLk" kind="show" identifier="selectedPedigree" action="showDetailViewController:sender:" id="AAB-JF-Mve"/>
+                                    <segue destination="l22-hp-SLk" kind="show" identifier="selectedPedigree" id="AAB-JF-Mve"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -40,7 +40,7 @@
                             <outlet property="delegate" destination="jPz-Fh-iDf" id="Ll5-JG-PKb"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="mAQ-El-lze"/>
+                    <navigationItem key="navigationItem" title="Pedigrees" id="mAQ-El-lze"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qro-iC-mbg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -79,7 +79,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="eQq-EW-d4F" kind="showDetail" identifier="selectIndividual" id="6Ij-vJ-7zb"/>
+                                    <segue destination="eQq-EW-d4F" kind="show" identifier="selectIndividual" action="showDetailViewController:sender:" id="6Ij-vJ-7zb"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

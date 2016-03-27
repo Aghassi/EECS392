@@ -62,8 +62,7 @@ class SelectedPedigreeTableViewController: UITableViewController {
       if (individual.father != nil) {
         let fatherName = "\(individual.father!.name.first) \(individual.father!.name.last)"
         let motherName = "\(individual.mother!.name.first) \(individual.mother!.name.last)"
-        cell.detailTextLabel?.text = "Father: \(fatherName) Mother: \(motherName)"
-        
+        cell.detailTextLabel?.text = "Father: \(fatherName), Mother: \(motherName)"
       }
       else {
         cell.detailTextLabel?.text = ""
