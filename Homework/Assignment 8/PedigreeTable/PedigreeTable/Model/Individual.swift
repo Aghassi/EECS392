@@ -8,9 +8,8 @@
 
 import UIKit
 
-enum Gender {
-  case MALE
-  case FEMALE
+enum Gender: Int {
+  case MALE = 0, FEMALE
 }
 
 class Individual: NSObject {
@@ -18,7 +17,7 @@ class Individual: NSObject {
   //least have these attributes: ID, First Name, Last Name, Gender, pointers to father and mother, disease status
   var ID: Int = 0
   var name = (first: "", last: "")
-  var gender = Gender.FEMALE
+  var gender: Gender?
   var mother: Individual?
   var father: Individual?
   
