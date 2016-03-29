@@ -9,19 +9,20 @@
 import UIKit
 
 class SelectedPedigreeTableViewController: UITableViewController {
+  private let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
   var selectedPedigree: Pedigree?
-  var family: [Individual]? {
-    return selectedPedigree?.family
-  }
+  var family: [Individual]? 
   
   enum Storyboard: String {
     case selectedIdentifier = "selectIndividual"
     case addIdentifier = "addIndividual"
+    case saveIndividual = "saveIndividual"
     case reuseIdentifier = "IndividualCell"
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    family = selectedPedigree?.family
     
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = false
@@ -30,9 +31,55 @@ class SelectedPedigreeTableViewController: UITableViewController {
     // self.navigationItem.rightBarButtonItem = self.editButtonItem()
   }
   
+  override func viewWillAppear(animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    tableView.reloadData()
+  }
+  
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
+  }
+  
+  @IBAction func individualWasSaved(segue: UIStoryboardSegue, sender: AnyObject) {
+    if segue.identifier == Storyboard.saveIndividual.rawValue {
+      let senderController = sender.sourceViewController as! IndividualDataViewController
+      let individualToSave = senderController.individual
+      if let individual = individualToSave {
+      
+        individual.name.first = senderController.nameTextField.text!
+        individual.name.last = (family![0] as Individual).name.last
+        switch senderController.genderTextField.text! {
+          case "Male":
+            individual.gender = Gender.MALE
+          case "Female":
+            individual.gender = Gender.FEMALE
+          default:
+            individual.gender = Gender.FEMALE
+        }
+        
+        // I should have done this differently, I would have prefered to find the actual individual. Or just stored the name
+        if let father = senderController.fatherTextField.text {
+          individual.father = Individual(id: -1, name: ("\(father)", ""), gender: Gender.MALE)
+        }
+        
+        if let mother = senderController.motherTextField.text {
+          individual.mother = Individual(id: -1, name: ("\(mother)", ""), gender: Gender.FEMALE)
+        }
+      
+        if individual.ID > family?.count {
+          family?.append(individual)
+        }
+        else {
+          family?[individual.ID] = individual
+        }
+        
+        selectedPedigree?.family = family!
+        let index = appDelegate.pedigrees.indexOf(selectedPedigree!)
+        appDelegate.pedigrees[index!] = selectedPedigree!
+      }
+    }
   }
   
   // MARK: - Table view data source
@@ -81,7 +128,7 @@ class SelectedPedigreeTableViewController: UITableViewController {
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     if segue.identifier == Storyboard.addIdentifier.rawValue {
       let destinationController = segue.destinationViewController as! IndividualDataViewController
-      destinationController.individual = nil
+      destinationController.individual = Individual(id: (family?.count)!+1, name: ("", ""), gender: Gender.FEMALE)
       destinationController.navigationItem.title = ""
     }
     if segue.identifier == Storyboard.selectedIdentifier.rawValue {

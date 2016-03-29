@@ -21,7 +21,7 @@ class IndividualDataViewController: UIViewController {
     super.viewDidLoad()
     
     if individual != nil {
-      nameTextField.text = "\(individual!.name.first) \(individual!.name.last)"
+      nameTextField.text = "\(individual!.name.first)"
       
       if individual!.father != nil {
         // This does count for the case when you could have one father and no mother
@@ -29,8 +29,8 @@ class IndividualDataViewController: UIViewController {
         motherTextField.text = "\(individual!.mother!.name.first)"
       }
       else {
-        fatherTextField.text = "None"
-        motherTextField.text = "None"
+        fatherTextField.text = ""
+        motherTextField.text = ""
       }
       
       if let gender = individual?.gender?.rawValue {
